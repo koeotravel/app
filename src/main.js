@@ -19,9 +19,6 @@ const config = {
 export const db = firebase.initializeApp(config).firestore()
 export const auth = firebase.auth()
 export const storage = firebase.storage()
-export const provider = {
-  google: new firebase.auth.GoogleAuthProvider(),
-}
 
 // Turn on Error Tracking for production environments only!
 if (process.env.NODE_ENV === 'production') {

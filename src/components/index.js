@@ -12,4 +12,3 @@ export { default as VLabel } from './VLabel'
 
 // Complex components
 export { default as VAppBar } from './VAppBar'
-export { default as VAuthButtonGoogle } from './VAuthButtonGoogle'
