@@ -1,4 +1,4 @@
-import { auth, provider } from '@/main'
+import { auth } from '@/main'
 import router from '@/router'
 
 const types = {
@@ -62,20 +62,6 @@ const actions = {
         commit(types.UID, { uid: '' })
         router.push({ name: 'login' })
       })
-  },
-
-  authGoogle: async ({ commit }) => {
-    try {
-      const result = await auth.signInWithPopup(provider.google)
-      commit(types.DISPLAY_NAME, { displayName: result.user.displayName })
-      commit(types.EMAIL, { email: result.user.email })
-      commit(types.EMAIL_VERIFIED, { emailVerified: result.user.emailVerified })
-      commit(types.PHOTO_URL, { photoURL: result.user.photoURL })
-      commit(types.UID, { uid: result.user.uid })
-      router.push({ name: 'dashboard' })
-    } catch (error) {
-      throw Error(error)
-    }
   },
 
   delete: ({ commit }, user) => {
