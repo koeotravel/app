@@ -1,28 +1,21 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <v-app-bar></v-app-bar>
+    <router-view/>
+    <ModalContainer v-show="$store.state.showModal"/>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VAppBar from './components/VAppBar'
+import ModalContainer from './components/ModalContainer'
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
+    VAppBar,
+    ModalContainer
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style src="./assets/main.scss" lang="scss"></style>
