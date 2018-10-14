@@ -1,7 +1,7 @@
 <template>
   <main>
     <v-app-bar></v-app-bar>
-    <router-view/>
+    <router-view></router-view>
     <ModalContainer v-show="$store.state.showModal"/>
   </main>
 </template>
@@ -18,4 +18,4 @@ export default {
 }
 </script>
 
-<style src="./assets/main.scss" lang="scss"></style>
+<style src="./assets/styles/main.scss" lang="scss"></style>

@@ -43,7 +43,7 @@ const router = new Router({
     },
     {
       path: '/password-reset',
-      name: 'passwordReset',
+      name: 'password reset',
       component: PasswordReset
     },
     {

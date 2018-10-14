@@ -1,0 +1,56 @@
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+::placeholder {
+  color: $eggplant-w;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+button, {
+  border: none;
+  border-radius: .25rem;
+  font-family: inherit;
+  font-size: $fs3;
+  line-height: 1;
+  padding: .75rem 1rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  border: $eggplant-w solid .125rem;
+  width: 100%;
+  transition: .25s;
+
+  &:focus {
+    outline: none;
+    border-color: $eggplant;
+  }
+}
+
+button {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.btn {
+  background-color: $eggplant;
+  color: $white;
+}
+
+.btn-2 {
+  background-color: $eggplant-w;
+  color: $eggplant;
+}
