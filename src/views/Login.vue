@@ -25,7 +25,6 @@
 
 <script>
 import {
-  VAuthButtonGoogle,
   VFieldset,
   VHr,
   VInputEmail,
@@ -34,7 +33,6 @@ import {
 
 export default {
   components: {
-    VAuthButtonGoogle,
     VFieldset,
     VHr,
     VInputEmail,

@@ -52,7 +52,6 @@ const router = new Router({
       component: NotFound
     }
   ],
-
 })
 
 router.beforeEach((to, from, next) => {

@@ -1,0 +1,311 @@
+
+$header-color: #163331;
+$paragraph-color: #0b1a18;
+$brand-color: #5bd3ca;
+$label-color: #666;
+$placeholder-color: #999;
+$shadow-color: #f0f0f0;
+$main-bg-color: #fafafa;
+$white: #fff;
+$off-white: #eee;
+
+$transportation: #96ccff;
+$transparent-brand: rgba(22, 51, 49, .5);
+$lodging: #ffd700;
+$event: $brand-color;
+
+body {
+  background-color: $main-bg-color;
+  color: $header-color;
+  font-family: 'Inter UI', sans-serif;
+  font-feature-settings: "ss01" on;
+}
+
+input:focus, button:focus {
+  outline: none;
+}
+
+input,
+select,
+textarea,
+button{
+  font-family: inherit;
+}
+
+p {
+  color: $paragraph-color;
+}
+
+.toggle-btn {
+    background: $white;
+    border-color: $brand-color;
+    color: $brand-color;
+    &.active {
+      background: $brand-color;
+      border-color: none;
+      color: $white;
+    }
+}
+
+.copy-btn {
+  background: $label-color;
+  border-radius: 0px 2px 2px 0px;
+  border-left: 0px;
+  color: $white;
+  &:hover {
+    background: $white;
+    color: $label-color;
+  }
+}
+
+.copy-input {
+  border-radius: 2px 0px 0px 2px;
+}
+
+.label {
+  color: $label-color;
+}
+
+.placeholder {
+  color: $placeholder-color;
+}
+
+.b--shadow-brand {
+  border-color: $shadow-color;
+}
+
+.b--brand {
+  border-color: $brand-color;
+}
+
+.brand {
+  color: $brand-color;
+}
+
+.bg-brand {
+  background-color: $brand-color;
+}
+
+.card-brand {
+  background: $white;
+  box-shadow: 0 1px 1px $shadow-color;
+}
+
+@media screen and (min-width: 30em) {
+  .card-brand-ns {
+    background: $white;
+    border-radius: .5rem;
+    box-shadow: 0 1px 1px $shadow-color;
+  }
+}
+
+.card-brand:not(.card-no-br) {
+  border-radius: .5rem;
+}
+
+.logo-test {
+  display: block;
+  margin: 0 auto;
+  padding-top: 70px;
+  width: 100px;
+}
+
+.bg-main {
+  background-color: $main-bg-color;
+}
+
+.vh-60 {
+  height: 60vh;
+}
+
+
+// Trip SCSS
+.top-empty-img {
+  &::before {
+    content: '';
+    display: block;
+    height: 1rem;
+    left: -.5rem;
+    position: absolute;
+    top: -.5rem;
+    width: 1rem;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    height: 1rem;
+    position: absolute;
+    right: -.5rem;
+    top: -.5rem;
+    width: 1rem;
+  }
+}
+
+.btop--transportation::before {
+  border {
+    left: 2px solid $transportation;
+    top: 2px solid $transportation;
+  }
+}
+
+.btop--lodging::before {
+  border {
+    left: 2px solid $lodging;
+    top: 2px solid $lodging;
+  }
+}
+
+.btop--event::before {
+  border {
+    left: 2px solid $event;
+    top: 2px solid $event;
+  }
+}
+
+.btop--transportation::after {
+  border {
+    right: 2px solid $transportation;
+    top: 2px solid $transportation;
+  }
+}
+
+.btop--lodging::after {
+  border {
+    right: 2px solid $lodging;
+    top: 2px solid $lodging;
+  }
+}
+
+.btop--event::after {
+  border {
+    right: 2px solid $event;
+    top: 2px solid $event;
+  }
+}
+
+.bottom-empty-img {
+  ::before {
+    border-bottom: 2px solid $off-white;
+    border-left: 2px solid $off-white;
+    bottom: -.5rem;
+    content: '';
+    display: block;
+    height: 1rem;
+    left: -.5rem;
+    position: absolute;
+    width: 1rem;
+  }
+
+  ::after {
+    bottom: -.5rem;
+    content: '';
+    display: block;
+    height: 1rem;
+    position: absolute;
+    right: -.5rem;
+    width: 1rem;
+  }
+}
+
+.bbottom--transportation::before {
+  border-bottom: 2px solid $transportation;
+  border-left: 2px solid $transportation;
+}
+
+.bbottom--lodging::before {
+  border-bottom: 2px solid $lodging;
+  border-left: 2px solid $lodging;
+}
+
+.bbottom--event::before {
+  border-bottom: 2px solid $event;
+  border-left: 2px solid $event;
+}
+
+.bbottom--transportation::after {
+  border-bottom: 2px solid $transportation;
+  border-right: 2px solid $transportation;
+}
+
+.bbottom--lodging::after {
+  border-bottom: 2px solid $lodging;
+  border-right: 2px solid $lodging;
+}
+
+.bbottom--event::after {
+  border-bottom: 2px solid $event;
+  border-right: 2px solid $event;
+}
+
+.input-inline:focus {
+  outline: 0;
+}
+
+.btn-group input {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.btn-group input:checked + label {
+  background-color: $brand-color;
+  color: $white;
+}
+
+.multiline-truncate {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.scrim {
+  background-color: $transparent-brand;
+}
+
+.modal {
+  max-height: 150vh;
+  overflow-y: auto;
+}
+
+
+// WIP scss needed to place
+.trip-itinerary-img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 30%;
+  max-width: 200px;
+  height: 133px;
+
+}
+
+.inline-itin {
+  display: inline-block;
+  border: 1px solid #ddd;
+}
+
+.event-details {
+  width: 70%;
+  min-width: 200px;
+  vertical-align: top;
+  height: 133px;
+  border-radius: 4px;
+
+}
+
+select {
+  overflow: hidden;
+  width: 100%;
+}
+
+.event-items {
+  li {
+    font-size: 12px;
+  }
+}
+
+// WIP scss needed to place

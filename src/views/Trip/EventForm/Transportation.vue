@@ -94,6 +94,7 @@ export default {
   methods: {
     ...mapActions(['createPlan']),
     handleCreateEvent(tripId, day, eventTransport) {
+      if(!day){ return }
       const event = {
         tripId,
         dayId: JSON.parse(day).id,
