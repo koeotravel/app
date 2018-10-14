@@ -1,5 +1,7 @@
+import firebase from 'firebase/app'
 import 'firebase/firestore'
-import firebase from 'firebase'
+import 'firebase/auth'
+import 'firebase/storage'
 import moment from 'moment'
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';

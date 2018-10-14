@@ -1,5 +1,6 @@
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import moment from 'moment'
-import firebase from 'firebase'
 import router from '@/router'
 import { db } from '@/main'
 
