@@ -1,10 +1,19 @@
 <template>
-  <form @submit.prevent="handleSignup(email, password)">
+  <form @submit.prevent="handleSignup(email, password)" class="mw16 gutters">
+    <h1>Create your account</h1>
     <v-fieldset>
-      <v-input-email v-model="email"/>
-      <v-input-password v-model="password"/>
+      <div class="form-group">
+        <v-input-email v-model="email" />
+      </div>
+      <div class="form-group">
+        <v-input-password v-model="password" />
+      </div>
     </v-fieldset>
-    <button type="submit">Sign up</button>
+
+    <button type="submit" class="btn mr4">Sign up</button>
+    <router-link :to="{name: 'login'}">
+      <button type="submit" class="btn btn-2">Log in &rarr;</button>
+    </router-link>
   </form>
 </template>
 
