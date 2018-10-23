@@ -1,6 +1,6 @@
 .logo {
   display: block;
-  width: 3rem;
+  width: 2rem;
 
   svg {
     max-width: 100%;
@@ -8,5 +8,63 @@
 }
 
 .appbar {
+  display: flex;
   padding: 1.25rem 1rem;
+
+  div:first-child {
+    flex: 1 1 auto;
+  }
+
+  div:nth-child(2) {
+    position: relative;
+
+    nav {
+      font-size: $fs3;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      text-align: right;
+      top: 2rem;
+      white-space: nowrap;
+
+      &::before {
+        content: '';
+        display: block;
+        border: .5rem solid transparent;
+        border-bottom: .5rem solid $white;
+        left: calc(100% - 2rem);
+        top: 0;
+        position: relative;
+        height: 0;
+        width: 0;
+      }
+
+      ul {
+        background-color: $white;
+        border-radius: .25rem;
+        box-shadow: $box-shadow;
+        list-style: none;
+        margin: 0;
+        padding: 1rem 1.25rem;
+      }
+
+      li:not(:last-child) { margin-bottom: $s2; }
+
+      a {
+        color: $eggplant;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .btn { width: 100%; }
+    }
+
+    &:hover {
+      nav {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
 }

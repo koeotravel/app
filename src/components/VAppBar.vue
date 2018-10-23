@@ -18,18 +18,16 @@
       </router-link>
     </div>
 
-    <nav>
-      <ul v-if="isUserLoggedIn">
-        <li>
-          <router-link :to="{name: 'account'}">
-            <v-avatar :src="user.photoURL"></v-avatar>
-          </router-link>
-        </li>
-        <li>
-          <button type="button" @click="logout">Log out</button>
-        </li>
-      </ul>
-    </nav>
+    <div v-if="userIsLoggedIn">
+      <v-avatar src="http://placekitten.com/100"></v-avatar>
+      <nav>
+        <ul>
+          <li><router-link :to="{name: 'profile'}">Profile</router-link></li>
+          <li><button type="button" @click="logout" class="btn">Log out</button></li>
+        </ul>
+      </nav>
+    </div>
+
   </div>
 </template>
 
@@ -54,7 +52,7 @@ export default {
 
   computed: {
     ...mapState(['user']),
-    ...mapGetters(['isUserLoggedIn']),
+    ...mapGetters(['userIsLoggedIn']),
   },
 
   methods: {

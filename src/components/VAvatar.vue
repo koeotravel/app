@@ -1,6 +1,6 @@
 <template>
   <img
-    width="40"
+    class="avatar"
     :src="src"
     :alt="alt"
   />

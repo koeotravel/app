@@ -48,9 +48,19 @@ button {
 .btn {
   background-color: $eggplant;
   color: $white;
+  font-weight: 700;
 }
 
 .btn-2 {
   background-color: $eggplant-w;
   color: $eggplant;
+}
+
+.btn-danger {
+  background-color: $raspberry;
+  color: white;
+}
+
+.btn-pill {
+  border-radius: 9999px;
 }

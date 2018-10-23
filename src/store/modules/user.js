@@ -10,7 +10,7 @@ const initialState = {
 }
 
 const getters = {
-  isUserLoggedIn: state => (!!state.data)
+  userIsLoggedIn: state => (!!state.data)
 }
 
 const actions = {

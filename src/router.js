@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Account from './views/Account'
+import Profile from './views/Profile'
 import Dashboard from './views/Dashboard'
 import PasswordReset from './views/PasswordReset'
 import Login from './views/Login'
@@ -26,9 +26,9 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
-      path: '/account',
-      name: 'account',
-      component: Account,
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       meta: { requiresAuth: true }
     },
     {
