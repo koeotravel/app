@@ -2,27 +2,15 @@ import { auth } from '@/main'
 import router from '@/router'
 
 const types = {
-  DISPLAY_NAME: 'user/DISPLAY_NAME',
-  EMAIL: 'user/EMAIL',
-  EMAIL_VERIFIED: 'user/EMAIL_VERIFIED',
-  PHOTO_URL: 'user/PHOTO_URL',
-  UID: 'user/UID',
-  INVITATIONS: 'user/INVITATIONS',
+  USER: 'user/USER',
 }
 
 const initialState = {
-  // Auth attributes
-  displayName: undefined,
-  email: undefined,
-  emailVerified: undefined,
-  photoURL: undefined,
-  uid: undefined,
-  // Firestore attributes
-  inviations: undefined,
+  data: undefined,
 }
 
 const getters = {
-  isUserLoggedIn: state => (!!state.uid)
+  isUserLoggedIn: state => (!!state.data)
 }
 
 const actions = {
@@ -30,11 +18,7 @@ const actions = {
     if (!email || !password) { return }
     try {
       const response = await auth.createUserWithEmailAndPassword(email, password)
-      commit(types.DISPLAY_NAME, { displayName: response.displayName })
-      commit(types.EMAIL, { email: response.email })
-      commit(types.EMAIL_VERIFIED, { emailVerified: response.emailVerified })
-      commit(types.PHOTO_URL, { photoURL: response.photoURL })
-      commit(types.UID, { uid: response.uid })
+      commit(types.USER, response.user)
       router.push({ name: 'dashboard' })
     } catch (error) {
       throw Error(error)
@@ -45,11 +29,7 @@ const actions = {
     if (!email || !password) { return }
     try {
       const response = await auth.signInWithEmailAndPassword(email, password)
-      commit(types.DISPLAY_NAME, { displayName: response.displayName })
-      commit(types.EMAIL, { email: response.email })
-      commit(types.EMAIL_VERIFIED, { emailVerified: response.emailVerified })
-      commit(types.PHOTO_URL, { photoURL: response.photoURL })
-      commit(types.UID, { uid: response.uid })
+      commit(types.USER, response.user)
       router.push({ name: 'dashboard' })
     } catch (error) {
       throw Error(error)
@@ -59,8 +39,8 @@ const actions = {
   logout: async ({ commit }) => {
     auth.signOut()
       .then(() => {
-        commit(types.UID, { uid: '' })
-        router.push({ name: 'login' })
+        commit(types.USER, initialState.data)
+        router.push({ name: 'dashboard' })
       })
   },
 
@@ -70,8 +50,8 @@ const actions = {
     if (result === 'DELETE') {
       user.delete()
         .then(() => {
-          commit(types.UID, { uid: '' })
-          router.push({ name: 'signup' })
+          commit(types.USER, initialState.data)
+          router.push({ name: 'dashboard' })
         })
         .catch((error) => { throw Error(error) })
     }
@@ -81,25 +61,10 @@ const actions = {
     auth.sendPasswordResetEmail(email)
       .catch((error) => { throw Error(error) })
   },
-
-  updatePhoto: ({ commit }, { url }) => {
-    auth.currentUser.updateProfile({
-      photoURL: url
-    })
-      .then(() => {
-        commit(types.PHOTO_URL, { photoURL: url })
-      }).catch((error) => {
-        throw Error(error)
-      })
-  }
 }
 
 const mutations = {
-  [types.DISPLAY_NAME]: (state, payload) => { state.displayName = payload.displayName },
-  [types.EMAIL]: (state, payload) => { state.email = payload.email },
-  [types.EMAIL_VERIFIED]: (state, payload) => { state.emailVerified = payload.emailVerified },
-  [types.PHOTO_URL]: (state, payload) => { state.photoURL = payload.photoURL },
-  [types.UID]: (state, payload) => { state.uid = payload.uid },
+  [types.USER]: (state, payload) => { state.data = payload }
 }
 
 export default {
