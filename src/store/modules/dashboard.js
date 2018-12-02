@@ -87,12 +87,14 @@ const actions = {
             const userRef = db.doc(`users/${attributes.userId}`)
             const userDoc = await userRef.get()
             const userInvitations = userDoc.data().invitations
-            userRef.update({
-              invitations: [
-                ...userInvitations,
-                invitationDoc.id
-              ]
-            })
+            if(userInvitations) {
+              userRef.update({
+                invitations: [
+                  ...userInvitations,
+                  invitationDoc.id
+                ]
+              })
+            }
           })
         for (let i = 1, len = numDays + 2; i < len; i += 1) {
           db.collection('trips')

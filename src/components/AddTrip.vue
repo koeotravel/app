@@ -6,22 +6,22 @@
     block
     /* removes scroll when modal is opened */
     overflow-hidden">
-    <div class="flex-auto measure-wide center card-brand-ns bg-white mv5-ns modal" @click.stop>
+    <div class="" @click.stop>
 
-      <header class="pa3 bb b--shadow-brand flex items-center">
-        <h3 class="ml4 mr2 mv0 f4 normal tc brand dib flex-auto">Add Trip</h3>
+      <header class="r">
+        <h3 class="">Add Trip</h3>
         <x-icon class="dib link dim no-underline pointer black-40" @click="closeModal"></x-icon>
       </header>
 
       <form @submit.prevent="handleAddTrip">
-        <v-fieldset class="ba b--transparent pa3 ma0">
-            <div class="card-brand overflow-hidden mb3 w-100 h4">
+        <v-fieldset class="">
+            <div class="">
               <div :style="{'background':'url('+newTrip.img+') center'}" class="h4 pa2 cover flex items-end justify-start">
                 <v-button type="button" btnType="secondary" :onClick="shuffleUnsplash" customClass="o-80">
                   <shuffle-icon></shuffle-icon>
                 </v-button>
                 <span class="flex-auto"></span>
-                <div class="bg-black-50 pv1 ph2 white br2">
+                <div class="">
                   <h6 class="f7 ma0 normal dib-ns">Trip Cover Image:</h6>
                   <span class="dib-ns">
                     <h6 class="f7 ma0 normal">Powered by
@@ -49,7 +49,7 @@
           <a class='bold f6 underline link dim black-40 mr3 pointer' @click="closeModal">
             Cancel
           </a>
-          <v-button type="submit">Add Trip</v-button>
+          <v-button type="submit">Add Trip This Button</v-button>
         </footer>
       </form>
 
@@ -139,10 +139,10 @@ export default {
         })
     },
     handleAddTrip() {
-      const attributes = {
+        const attributes = {
         trip: this.$store.state.dashboard.newTrip,
-        userId: this.$store.state.user.uid,
-        userEmail: this.$store.state.user.email,
+        userId: this.$store.state.user.data.uid,
+        userEmail: this.$store.state.user.data.email,
         startDate: this.startDate,
         endDate: this.endDate,
       }
