@@ -115,10 +115,11 @@ const actions = {
       })
   },
 
-  fetchTrips: async ({ commit }, { id }) => {
-    if (!id) { return }
+  fetchTrips: async ({ commit },  id ) => {
+    const { uid } = id;
+    if (!uid) { return }
     try {
-      const userRef = db.doc(`users/${id}`)
+      const userRef = db.doc(`users/${uid}`)
       const userDoc = await userRef.get()
       const userInvitations = userDoc.data().invitations
       if (!userInvitations) {

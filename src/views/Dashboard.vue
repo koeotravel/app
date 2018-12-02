@@ -118,7 +118,7 @@ export default {
   },
 
   created() {
-    const { uid } = this.$store.state.user
+    const { uid } = this.$store.state.user.data
     if (uid) {
       this.$store.dispatch('fetchTrips', { uid })
     }
