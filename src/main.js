@@ -18,7 +18,14 @@ const config = {
   messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
 }
 
-export const db = firebase.initializeApp(config).firestore()
+firebase.initializeApp(config)
+
+export const db = firebase.firestore()
+
+// Disable deprecated features
+db.settings({
+  timestampsInSnapshots: true
+});
 export const auth = firebase.auth()
 export const storage = firebase.storage()
 
