@@ -55,7 +55,6 @@ export default {
       eventTransport: {
         type: 'transport',
         subtype: 'flight',
-        createdAt: Date.now(),
         name: '',
         arrival: {
           location: '',

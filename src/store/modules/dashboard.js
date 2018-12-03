@@ -57,16 +57,13 @@ const actions = {
       return title
     }
     db.collection('trips').add({
-      created_at: Date.now(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       archived: false,
       name: attributes.trip.name,
       cost: attributes.trip.cost,
       start: attributes.startDate,
       end: attributes.endDate,
       description: attributes.trip.description,
-      img: attributes.trip.img,
-      img_author: attributes.trip.img_author,
-      img_author_url: attributes.trip.img_author_url,
       party: [
         {
           uid: attributes.userId,
@@ -78,7 +75,7 @@ const actions = {
       .then((docRef) => {
         db.collection('invitations')
           .add({
-            created: firebase.firestore.FieldValue.serverTimestamp(),
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             tripId: docRef.id,
             email: attributes.userEmail,
             rsvp: 'YES'
@@ -102,7 +99,7 @@ const actions = {
             .collection('days')
             .doc(dateName(i))
             .set({
-              created_at: Date.now() + i,
+              createdAt: Date.now() + i,
               name: dateName(i),
               date: moment(attributes.start).add(i - 1, 'days').format('YYYY-MM-DD')
             })

@@ -27,7 +27,7 @@
     </form>
 
     <div>
-      <router-link :to="{name: 'passwordReset'}">
+      <router-link :to="{name: 'password reset'}">
         Reset Password
       </router-link>
     </div>

@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 import { db } from '@/main'
 
 const initialState = {
@@ -16,7 +17,7 @@ const actions = {
       db.collection('chatGroup').doc(message.chatId)
         .collection('messages').add({
           sender: { uid: rootState.user.uid, email: rootState.user.email },
-          timestamp: Date.now(),
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           body: message.text,
         })
         .then(() => { this.message = '' })
