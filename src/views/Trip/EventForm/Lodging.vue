@@ -46,7 +46,6 @@ export default {
       eventLodging: {
         type: '',
         subtype: '',
-        createdAt: Date.now(),
         name: '',
         startTime: '',
         endTime: '',
