@@ -19,14 +19,19 @@
     </div>
 
     <div v-if="userIsLoggedIn">
-      <v-avatar src="http://placekitten.com/100"></v-avatar>
+      <v-button :onClick="handleTripModal">Add Trip</v-button>
+
+      <!-- <v-avatar src="http://placekitten.com/100"></v-avatar>
       <nav>
         <ul>
           <li><router-link :to="{name: 'profile'}">Profile</router-link></li>
           <li><button type="button" @click="logout" class="btn">Log out</button></li>
         </ul>
-      </nav>
+      </nav> -->
     </div>
+
+    <!-- Create trip modal -->
+    <addtrip v-show="this.showTripModal"></addtrip>
 
   </div>
 </template>
@@ -35,11 +40,13 @@
 import { mapActions, mapGetters, mapState } from 'vuex'
 import {
   VAvatar,
+  VButton,
   VHr,
 } from '.'
 
 export default {
   components: {
+    VButton,
     VAvatar,
     VHr,
   },

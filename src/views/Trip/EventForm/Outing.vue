@@ -38,7 +38,6 @@ export default {
       eventOuting: {
         type: '',
         subtype: '',
-        createdAt: Date.now(),
         name: '',
         startTime: '',
         endTime: '',

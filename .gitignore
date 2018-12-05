@@ -19,3 +19,11 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Core service files
+/functions
+.firebaserc
+firebase.json
+firestore.indexes.json
+firestore.rules
+storage.rules
