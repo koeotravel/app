@@ -11,4 +11,4 @@ deploy_staging:
     - npm install
     - now
   only:
-    - deploy
+    - develop
