@@ -33,10 +33,12 @@
 </template>
 
 <script>
-import { NavigationIcon, HomeIcon, SunIcon, EditIcon, Trash2Icon } from 'vue-feather-icons'
-import Lodging from './Lodging'
-import Transportation from './Transportation'
-import Outing from './Outing'
+import {
+  NavigationIcon, HomeIcon, SunIcon, EditIcon, Trash2Icon,
+} from 'vue-feather-icons';
+import Lodging from './Lodging';
+import Transportation from './Transportation';
+import Outing from './Outing';
 
 export default {
   components: {
@@ -47,12 +49,12 @@ export default {
     Trash2Icon,
     Lodging,
     Transportation,
-    Outing
+    Outing,
   },
   data() {
     return {
       eventType: 'transportation',
-    }
+    };
   },
   computed: {
 
@@ -60,36 +62,36 @@ export default {
 
   methods: {
     defineEventType(eventType) {
-      this.eventType = eventType
-      return this.eventType
+      this.eventType = eventType;
+      return this.eventType;
     },
   },
 
   props: {
     details: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     layover: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     leftTitleTop: {
       type: String,
-      default: ''
+      default: '',
     },
     leftSubtitleTop: {
       type: String,
-      default: ''
+      default: '',
     },
     leftTitleBottom: {
       type: String,
-      default: ''
+      default: '',
     },
     leftSubtitleBottom: {
       type: String,
-      default: ''
+      default: '',
     },
-  }
-}
+  },
+};
 </script>

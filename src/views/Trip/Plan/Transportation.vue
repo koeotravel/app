@@ -128,20 +128,20 @@
 </template>
 
 <script>
-import { ExternalLinkIcon, MapPinIcon } from 'vue-feather-icons'
-import Main from './main'
+import { ExternalLinkIcon, MapPinIcon } from 'vue-feather-icons';
+import Main from './main';
 
 export default {
   components: {
     ExternalLinkIcon,
     MapPinIcon,
-    'v-plan': Main
+    'v-plan': Main,
   },
   props: {
     details: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
-  }
-}
+  },
+};
 </script>

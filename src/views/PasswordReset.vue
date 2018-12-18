@@ -17,27 +17,27 @@
 </template>
 
 <script>
-import { auth } from '@/main'
-import VFieldset from '@/components/VFieldset'
-import VInputEmail from '@/components/VInputEmail'
+import { auth } from '@/main';
+import VFieldset from '@/components/VFieldset';
+import VInputEmail from '@/components/VInputEmail';
 
 export default {
   components: {
     VFieldset,
-    VInputEmail
+    VInputEmail,
   },
 
   data() {
     return {
       email: '',
-    }
+    };
   },
 
   methods: {
     handlePasswordReset(email) {
       auth.sendPasswordResetEmail(email)
-        .catch((error) => { throw Error(error) })
+        .catch((error) => { throw Error(error); });
     },
   },
-}
+};
 </script>

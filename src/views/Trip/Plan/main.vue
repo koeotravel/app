@@ -54,7 +54,9 @@
 </template>
 
 <script>
-import { NavigationIcon, HomeIcon, SunIcon, EditIcon, Trash2Icon } from 'vue-feather-icons'
+import {
+  NavigationIcon, HomeIcon, SunIcon, EditIcon, Trash2Icon,
+} from 'vue-feather-icons';
 
 export default {
   components: {
@@ -67,13 +69,13 @@ export default {
 
   computed: {
     isTransportation() {
-      return this.details.type === 'transportation'
+      return this.details.type === 'transportation';
     },
     isLodging() {
-      return this.details.type === 'lodging'
+      return this.details.type === 'lodging';
     },
     isEvent() {
-      return this.details.type === 'event'
+      return this.details.type === 'event';
     },
   },
 
@@ -81,44 +83,44 @@ export default {
     handlePlanModal(planId) {
       const attributes = {
         tripId: this.$route.params.id,
-        planId
-      }
-      this.$store.dispatch('fetchPlan', attributes)
+        planId,
+      };
+      this.$store.dispatch('fetchPlan', attributes);
     },
     handleDeletePlan(planId) {
       const attributes = {
         tripId: this.$route.params.id,
-        planId
-      }
-      this.$store.dispatch('deletePlan', attributes)
-    }
+        planId,
+      };
+      this.$store.dispatch('deletePlan', attributes);
+    },
   },
 
   props: {
     details: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     layover: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     leftTitleTop: {
       type: String,
-      default: ''
+      default: '',
     },
     leftSubtitleTop: {
       type: String,
-      default: ''
+      default: '',
     },
     leftTitleBottom: {
       type: String,
-      default: ''
+      default: '',
     },
     leftSubtitleBottom: {
       type: String,
-      default: ''
+      default: '',
     },
-  }
-}
+  },
+};
 </script>

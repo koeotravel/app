@@ -1,8 +1,8 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import moment from 'moment'
-import router from '@/router'
-import { db } from '@/main'
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import moment from 'moment';
+import router from '@/router';
+import { db } from '@/main';
 
 const initialState = {
   trips: [],
@@ -19,8 +19,8 @@ const initialState = {
   },
   archiveView: false,
   activeTrips: [],
-  archivedTrips: []
-}
+  archivedTrips: [],
+};
 
 const getters = {
   showTripModal: state => state.showTripModal,
@@ -31,30 +31,30 @@ const getters = {
   activeTrips: state => state.trips.filter(trip => trip.archived === false),
   archivedTrips: state => state.trips.filter(trip => trip.archived === true),
   today: () => {
-    let today = new Date()
+    let today = new Date();
     today = moment(today).format('YYYY-MM-DD');
-    return today
+    return today;
   },
   newMaxEndDate: (state) => {
-    const currentDate = moment(state.newTrip.start)
+    const currentDate = moment(state.newTrip.start);
     let oneMonth = currentDate.add(34, 'days');
     oneMonth = moment(oneMonth).format('YYYY-MM-DD');
-    return oneMonth
+    return oneMonth;
   },
-}
+};
 
 const actions = {
   addTrip: ({ commit }, attributes) => {
-    const start = moment(attributes.startDate)
-    const end = moment(attributes.endDate)
-    const numDays = end.diff(start, 'days')
+    const start = moment(attributes.startDate);
+    const end = moment(attributes.endDate);
+    const numDays = end.diff(start, 'days');
     function dateName(len) {
-      let num = String(len)
+      let num = String(len);
       while (num.length < 2) {
-        num = `0${num}`
+        num = `0${num}`;
       }
-      const title = `Day ${num}`
-      return title
+      const title = `Day ${num}`;
+      return title;
     }
     db.collection('trips').add({
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -69,7 +69,7 @@ const actions = {
           uid: attributes.userId,
           role: 'admin',
           invitation: 'accepted',
-        }
+        },
       ],
     })
       .then((docRef) => {
@@ -78,21 +78,21 @@ const actions = {
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             tripId: docRef.id,
             email: attributes.userEmail,
-            rsvp: 'YES'
+            rsvp: 'YES',
           })
           .then(async (invitationDoc) => {
-            const userRef = db.doc(`users/${attributes.userId}`)
-            const userDoc = await userRef.get()
-            const userInvitations = userDoc.data().invitations
-            if(userInvitations) {
+            const userRef = db.doc(`users/${attributes.userId}`);
+            const userDoc = await userRef.get();
+            const userInvitations = userDoc.data().invitations;
+            if (userInvitations) {
               userRef.update({
                 invitations: [
                   ...userInvitations,
-                  invitationDoc.id
-                ]
-              })
+                  invitationDoc.id,
+                ],
+              });
             }
-          })
+          });
         for (let i = 1, len = numDays + 2; i < len; i += 1) {
           db.collection('trips')
             .doc(docRef.id)
@@ -101,115 +101,115 @@ const actions = {
             .set({
               createdAt: Date.now() + i,
               name: dateName(i),
-              date: moment(attributes.start).add(i - 1, 'days').format('YYYY-MM-DD')
-            })
+              date: moment(attributes.start).add(i - 1, 'days').format('YYYY-MM-DD'),
+            });
         }
-        commit('closeTripModal')
-        router.push({ path: `/trips/${docRef.id}` })
+        commit('closeTripModal');
+        router.push({ path: `/trips/${docRef.id}` });
       })
       .catch((err) => {
-        if (err) throw Error(err)
-      })
+        if (err) throw Error(err);
+      });
   },
 
-  fetchTrips: async ({ commit },  id ) => {
+  fetchTrips: async ({ commit }, id) => {
     const { uid } = id;
-    if (!uid) { return }
+    if (!uid) { return; }
     try {
-      const userRef = db.doc(`users/${uid}`)
-      const userDoc = await userRef.get()
-      const userInvitations = userDoc.data().invitations
+      const userRef = db.doc(`users/${uid}`);
+      const userDoc = await userRef.get();
+      const userInvitations = userDoc.data().invitations;
       if (!userInvitations) {
         userRef.update({
-          invitations: []
-        })
+          invitations: [],
+        });
       }
       const trips = userInvitations.map(async (invitationId) => {
-        const invitationDoc = await db.doc(`invitations/${invitationId}`).get()
-        const tripId = invitationDoc.data().tripId
-        const tripDoc = await db.doc(`trips/${tripId}`).get()
-        return { ...tripDoc.data(), id: tripDoc.id }
-      })
+        const invitationDoc = await db.doc(`invitations/${invitationId}`).get();
+        const tripId = invitationDoc.data().tripId;
+        const tripDoc = await db.doc(`trips/${tripId}`).get();
+        return { ...tripDoc.data(), id: tripDoc.id };
+      });
 
       Promise.all(trips).then((userTrips) => {
-        commit('setTrips', userTrips)
-      })
+        commit('setTrips', userTrips);
+      });
     } catch (error) {
-      throw Error(error)
+      throw Error(error);
     }
   },
 
   updateTrip: ({ state }, attributes) => {
-    let tripId = ''
+    let tripId = '';
     if ('index' in attributes) {
-      tripId = state.trips[attributes.index].id
+      tripId = state.trips[attributes.index].id;
     } else {
-      tripId = attributes.id
+      tripId = attributes.id;
     }
-    const updatedTrip = attributes.trip
+    const updatedTrip = attributes.trip;
     db.collection('trips')
       .doc(tripId)
       .update(updatedTrip)
       .catch((err) => {
-        if (err) throw Error(err)
-      })
+        if (err) throw Error(err);
+      });
   },
 
   deleteTrip: ({ state }, tripIndex) => {
-    const tripId = state.trips[tripIndex].id
+    const tripId = state.trips[tripIndex].id;
     db.collection('trips')
       .doc(tripId)
-      .delete()
+      .delete();
   },
-}
+};
 
 const mutations = {
   setTrips: (state, trips) => {
-    state.trips = trips
+    state.trips = trips;
   },
 
   countTrips: (state) => {
-    let numActiveTrips = 0
+    let numActiveTrips = 0;
     for (let i = 0, len = state.trips.length; i < len; i += 1) {
       if (state.trips[i].archived === false) {
         numActiveTrips += 1;
       }
     }
-    state.numActiveTrips = numActiveTrips
+    state.numActiveTrips = numActiveTrips;
     let numArchivedTrips = 0;
     for (let i = 0, len = state.trips.length; i < len; i += 1) {
       if (state.trips[i].archived === true) {
         numArchivedTrips += 1;
       }
     }
-    state.numArchivedTrips = numArchivedTrips
+    state.numArchivedTrips = numArchivedTrips;
   },
 
   clearAddTrip: (state) => {
-    state.newTrip.name = ''
-    const dateInput = document.querySelectorAll('input[type="date"]')
+    state.newTrip.name = '';
+    const dateInput = document.querySelectorAll('input[type="date"]');
     for (let i = 0, len = dateInput.length; i < len; i += 1) {
-      dateInput[i].setAttribute('type', 'text')
+      dateInput[i].setAttribute('type', 'text');
     }
-    state.newTrip.start = ''
-    state.newTrip.end = ''
-    state.newTrip.description = ''
+    state.newTrip.start = '';
+    state.newTrip.end = '';
+    state.newTrip.description = '';
   },
 
   openTripModal: (state) => {
-    state.showTripModal = true
-    document.body.classList.add('overflow-hidden')
+    state.showTripModal = true;
+    document.body.classList.add('overflow-hidden');
   },
 
   closeTripModal: (state) => {
-    state.showTripModal = false
-    document.body.classList.remove('overflow-hidden')
-  }
-}
+    state.showTripModal = false;
+    document.body.classList.remove('overflow-hidden');
+  },
+};
 
 export default {
   state: initialState,
   getters,
   actions,
-  mutations
-}
+  mutations,
+};

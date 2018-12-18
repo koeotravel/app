@@ -126,11 +126,13 @@
 
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
-import moment from 'moment'
-import { XIcon, ShuffleIcon, Maximize2Icon, Minimize2Icon, ChevronLeftIcon, ChevronRightIcon, ExternalLinkIcon, } from 'vue-feather-icons'
+import { mapGetters, mapMutations } from 'vuex';
+import moment from 'moment';
+import {
+  XIcon, ShuffleIcon, Maximize2Icon, Minimize2Icon, ChevronLeftIcon, ChevronRightIcon, ExternalLinkIcon,
+} from 'vue-feather-icons';
 import VButton from '@/components/VButton';
-import Input from '@/components/Input'
+import Input from '@/components/Input';
 
 export default {
   components: {
@@ -142,96 +144,96 @@ export default {
     XIcon,
     ShuffleIcon,
     VButton,
-    'v-input': Input
+    'v-input': Input,
   },
 
   data() {
     return {
       show: this.$store.state.showModalView === 'modal-update-plan',
       textArea: false,
-    }
+    };
   },
 
   computed: {
     hasVenue() {
-      return this.currentPlan.venue && Object.keys(this.currentPlan.venue).length !== 0
+      return this.currentPlan.venue && Object.keys(this.currentPlan.venue).length !== 0;
     },
     isEvent() {
-      return this.currentPlan.type === 'event'
+      return this.currentPlan.type === 'event';
     },
     showTextArea() {
-      return this.textArea === true
+      return this.textArea === true;
     },
     ...mapGetters(['currentTrip', 'currentPlan', 'days']),
     minTime() {
       if (this.date === this.end_date) {
-        return this.start
+        return this.start;
       }
-      return null
-    }
+      return null;
+    },
   },
 
   filters: {
     humanPlanDate(date) {
-      return moment(date).format('MMMM Do YYYY')
+      return moment(date).format('MMMM Do YYYY');
     },
     capitalize(value) {
-      if (!value) return ''
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    }
+      if (!value) return '';
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    },
   },
 
   mounted() {
     document.addEventListener('keydown', (e) => {
       if (this.$store.state.trip.showPlanModal === true && e.keyCode === 27) {
-        this.$store.commit('closePlanModal')
+        this.$store.commit('closePlanModal');
       }
-    })
+    });
   },
 
   methods: {
     ...mapMutations(['openModal', 'closeModal']),
     handleToggleVenueImg(direction) {
-      let i = this.currentPlan.venuePhotosIndex
+      let i = this.currentPlan.venuePhotosIndex;
       if (direction === 'left') {
         if (i === 0) {
-          i = this.currentPlan.venuePhotos.length - 1
+          i = this.currentPlan.venuePhotos.length - 1;
         } else {
-          i -= 1
+          i -= 1;
         }
       }
       if (direction === 'right') {
         if (i === this.currentPlan.venuePhotos.length - 1) {
-          i = 0
+          i = 0;
         } else {
-          i += 1
+          i += 1;
         }
       }
-      this.currentPlan.venuePhotosIndex = i
-      this.currentPlan.img = `${this.currentPlan.venuePhotos[i].prefix}${this.currentPlan.venuePhotos[i].height}x${this.currentPlan.venuePhotos[i].width}${this.currentPlan.venuePhotos[i].suffix}`
+      this.currentPlan.venuePhotosIndex = i;
+      this.currentPlan.img = `${this.currentPlan.venuePhotos[i].prefix}${this.currentPlan.venuePhotos[i].height}x${this.currentPlan.venuePhotos[i].width}${this.currentPlan.venuePhotos[i].suffix}`;
     },
     expandNotes() {
-      this.textArea = !this.textArea
+      this.textArea = !this.textArea;
     },
     startDateChange() {
       if (this.currentPlan.end_date <= this.currentPlan.date) {
-        this.currentPlan.end_date = this.currentPlan.date
+        this.currentPlan.end_date = this.currentPlan.date;
       }
     },
     shuffleUnsplash() {
-      const img = this.currentPlan.img.slice(0, -1)
-      const rand = Math.floor(Math.random() * 9) + 1
-      const newImg = img + rand
-      this.currentPlan.img = newImg
+      const img = this.currentPlan.img.slice(0, -1);
+      const rand = Math.floor(Math.random() * 9) + 1;
+      const newImg = img + rand;
+      this.currentPlan.img = newImg;
     },
     handleUpdatePlan() {
       const attributes = {
         tripId: this.$route.params.id,
-        plan: this.currentPlan
-      }
-      this.$store.dispatch('updatePlan', attributes)
-      this.$store.commit('closePlanModal')
+        plan: this.currentPlan,
+      };
+      this.$store.dispatch('updatePlan', attributes);
+      this.$store.commit('closePlanModal');
     },
   },
-}
+};
 </script>

@@ -8,24 +8,24 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
-import ModalUpdatePlan from '@/views/Trip/ModalUpdatePlan'
-import TripMembersModal from '@/views/Trip/TripMembersModal'
+import { mapMutations, mapState } from 'vuex';
+import ModalUpdatePlan from '@/views/Trip/ModalUpdatePlan';
+import TripMembersModal from '@/views/Trip/TripMembersModal';
 import AddTrip from './AddTrip';
 
 export default {
   components: {
     AddTrip,
     ModalUpdatePlan,
-    TripMembersModal
+    TripMembersModal,
   },
   methods: {
-    ...mapMutations(['closeModal'])
+    ...mapMutations(['closeModal']),
   },
   computed: {
     ...mapState({
-      currentView: state => state.showModalView
-    })
-  }
-}
+      currentView: state => state.showModalView,
+    }),
+  },
+};
 </script>

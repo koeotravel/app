@@ -23,59 +23,59 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from 'vuex'
-import { VAvatarStack } from '@/components'
-import AddTrip from '@/components/AddTrip'
-import VButton from '@/components/VButton'
+import { mapGetters, mapMutations, mapState } from 'vuex';
+import { VAvatarStack } from '@/components';
+import AddTrip from '@/components/AddTrip';
+import VButton from '@/components/VButton';
 
 export default {
   components: {
     addtrip: AddTrip,
     VButton,
-    VAvatarStack
+    VAvatarStack,
   },
 
   data() {
     return {
       showTripModal: this.$store.state.dashboard.showTripModal,
-    }
+    };
   },
 
   created() {
-    const { uid } = this.$store.state.user.data
+    const { uid } = this.$store.state.user.data;
     if (uid) {
-      this.$store.dispatch('fetchTrips', { uid })
+      this.$store.dispatch('fetchTrips', { uid });
     }
   },
 
   methods: {
     ...mapMutations(['openModal', 'closeModal']),
     viewArchived() {
-      this.archiveView = !this.archiveView
+      this.archiveView = !this.archiveView;
     },
     handleTripModal() {
-      this.$store.commit('clearAddTrip')
-      this.$store.commit('openModal', 'add-trip')
+      this.$store.commit('clearAddTrip');
+      this.$store.commit('openModal', 'add-trip');
     },
     handleArchiveTrip(tripIndex, archiveVal) {
       const attributes = {
         index: tripIndex,
         trip: {
-          archived: !archiveVal
-        }
-      }
-      this.$store.dispatch('updateTrip', attributes)
+          archived: !archiveVal,
+        },
+      };
+      this.$store.dispatch('updateTrip', attributes);
     },
     handleDeleteTrip(tripIndex) {
-      this.$store.dispatch('deleteTrip', tripIndex)
+      this.$store.dispatch('deleteTrip', tripIndex);
     },
   },
 
   computed: {
     ...mapState({
-      trips: state => state.dashboard.trips
+      trips: state => state.dashboard.trips,
     }),
-    ...mapGetters(['numActiveTrips', 'numArchivedTrips', 'newTrip', 'activeTrips', 'archivedTrips'])
-  }
-}
+    ...mapGetters(['numActiveTrips', 'numArchivedTrips', 'newTrip', 'activeTrips', 'archivedTrips']),
+  },
+};
 </script>

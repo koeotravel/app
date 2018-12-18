@@ -41,14 +41,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { storage } from '@/main'
+import { mapState } from 'vuex';
+import { storage } from '@/main';
 import {
   VFieldset,
   VInputEmail,
   VInputText,
   VLabel,
-} from '@/components'
+} from '@/components';
 
 export default {
   components: {
@@ -64,45 +64,44 @@ export default {
       name: '',
       file: null,
       progress: 0,
-    }
+    };
   },
 
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user']),
   },
 
   methods: {
     holdFile(event) {
-      this.file = event.target.files[0]
-      this.progress = 0
+      this.file = event.target.files[0];
+      this.progress = 0;
     },
 
     uploadAvatar(image, userId) {
-      if (!image) { throw Error('Please select an image') }
-      const storageRef = storage.ref(`users/${userId}/avatar.png`)
-      const task = storageRef.put(image)
+      if (!image) { throw Error('Please select an image'); }
+      const storageRef = storage.ref(`users/${userId}/avatar.png`);
+      const task = storageRef.put(image);
 
       task.on('state_changed',
         (snapshot) => {
-          const { bytesTransferred, totalBytes } = snapshot
-          const p = (bytesTransferred / totalBytes) * 100
-          this.progress = p
+          const { bytesTransferred, totalBytes } = snapshot;
+          const p = (bytesTransferred / totalBytes) * 100;
+          this.progress = p;
         },
 
         (storageError) => {
-          throw Error(storageError)
+          throw Error(storageError);
         },
 
         () => {
           storage.ref().child(`users/${userId}/avatar.png`).getDownloadURL()
             .then((url) => {
-              this.$store.dispatch('updatePhoto', { url })
+              this.$store.dispatch('updatePhoto', { url });
             })
             .catch((error) => {
-              throw Error(error)
-            })
-        }
-      )
+              throw Error(error);
+            });
+        });
     },
 
     handleUpdateUser() {
@@ -110,13 +109,13 @@ export default {
         email: this.email,
         name: this.name,
         photoURL: this.photoURL,
-      }
-      this.$store.dispatch('update', attributes)
+      };
+      this.$store.dispatch('update', attributes);
     },
 
     handleDeleteUser() {
-      this.$store.dispatch('delete', this.$store.state.user.currentUser)
+      this.$store.dispatch('delete', this.$store.state.user.currentUser);
     },
   },
-}
+};
 </script>

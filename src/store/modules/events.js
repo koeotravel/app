@@ -1,6 +1,6 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import { db } from '@/main'
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { db } from '@/main';
 
 const initialState = {
   data: [],
@@ -23,7 +23,7 @@ async function getEventItemsByDayId({ tripId, dayId }) {
 
 const actions = {
   createPlan: ({ commit }, { tripId, dayId, eventObject }) => {
-    if (!tripId || !dayId) { return }
+    if (!tripId || !dayId) { return; }
     const dayDocument = db.doc(`trips/${tripId}/days/${dayId}`);
     dayDocument.collection('events').add({
       created: firebase.firestore.FieldValue.serverTimestamp(),
@@ -32,11 +32,11 @@ const actions = {
       const updatedEvents = await db.doc(`trips/${tripId}/days/${dayId}`).collection('events').get();
       commit('setEvents', updatedEvents.docs.map(event => ({
         id: event.id,
-        ...event.data()
-      })))
+        ...event.data(),
+      })));
     }).then(async () => {
       try {
-        const updatedDays = await db.doc(`trips/${tripId}`).collection('days').get()
+        const updatedDays = await db.doc(`trips/${tripId}`).collection('days').get();
         const dayDocs = updatedDays.docs;
         const days = [];
         Promise.all(dayDocs.map((doc) => {
@@ -47,14 +47,13 @@ const actions = {
           return eventItemsPromise.then((eventItems) => {
             day.event = eventItems;
             days.push(day);
-            return day
-          })
+            return day;
+          });
         })).then(values => commit('setDays', values));
       } catch (error) {
-        throw Error(error)
+        throw Error(error);
       }
-    }
-    )
+    });
   },
   // removePlan: async ({ commit }, { tripId, dayId }) => {
   //   // db.doc(`trips/${tripId}`).collection('days').doc(`${dayId}`).delete()
@@ -64,12 +63,12 @@ const actions = {
   //   //   ...day.data()
   //   // })))
   // },
-}
+};
 
 const mutations = {
   setEvents: (state, events) => {
-    state.data = events
-  }
+    state.data = events;
+  },
 };
 
 
@@ -77,5 +76,5 @@ export default {
   state: initialState,
   getters,
   actions,
-  mutations
-}
+  mutations,
+};

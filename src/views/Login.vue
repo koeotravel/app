@@ -36,7 +36,7 @@ import {
   VHr,
   VInputEmail,
   VInputPassword,
-} from '@/components'
+} from '@/components';
 
 export default {
   components: {
@@ -50,15 +50,15 @@ export default {
     return {
       email: undefined,
       password: undefined,
-    }
+    };
   },
 
   methods: {
     handleLogin(email, password) {
-      this.$store.dispatch('login', { email, password })
-      this.email = ''
-      this.password = ''
+      this.$store.dispatch('login', { email, password });
+      this.email = '';
+      this.password = '';
     },
   },
-}
+};
 </script>

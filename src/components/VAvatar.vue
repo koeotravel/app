@@ -15,6 +15,6 @@ export default {
     alt: {
       type: String,
     },
-  }
-}
+  },
+};
 </script>

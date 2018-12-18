@@ -53,17 +53,17 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   methods: {
-    ...mapMutations(['closeModal', 'showMemberSettings', 'showInviteSettings'])
+    ...mapMutations(['closeModal', 'showMemberSettings', 'showInviteSettings']),
   },
   computed: {
     ...mapState({
       memberSettingsView: state => state.invitations.memberSettingsView,
-      inviteSettingsView: state => state.invitations.inviteSettingsView
-    })
-  }
-}
+      inviteSettingsView: state => state.invitations.inviteSettingsView,
+    }),
+  },
+};
 </script>

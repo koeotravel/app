@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Profile from './views/Profile'
-import Dashboard from './views/Dashboard'
-import PasswordReset from './views/PasswordReset'
-import Login from './views/Login'
-import Signup from './views/Signup'
-import Trip from './views/Trip/index'
-import NotFound from './views/NotFound'
-import { auth } from './main'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Profile from './views/Profile';
+import Dashboard from './views/Dashboard';
+import PasswordReset from './views/PasswordReset';
+import Login from './views/Login';
+import Signup from './views/Signup';
+import Trip from './views/Trip/index';
+import NotFound from './views/NotFound';
+import { auth } from './main';
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
   routes: [
@@ -17,19 +17,19 @@ const router = new Router({
       path: '/',
       name: 'dashboard',
       component: Dashboard,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
       path: '/trips/:id',
       name: 'trip',
       component: Trip,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
       path: '/profile',
       name: 'profile',
       component: Profile,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
       path: '/login',
@@ -44,15 +44,15 @@ const router = new Router({
     {
       path: '/password-reset',
       name: 'password reset',
-      component: PasswordReset
+      component: PasswordReset,
     },
     {
       path: '*',
       name: 'not-found',
-      component: NotFound
-    }
+      component: NotFound,
+    },
   ],
-})
+});
 
 router.beforeEach((to, from, next) => {
   auth.onAuthStateChanged((user) => {
@@ -60,15 +60,15 @@ router.beforeEach((to, from, next) => {
       if (!user) {
         next({
           path: '/login',
-          query: { redirect: to.fullPath }
-        })
+          query: { redirect: to.fullPath },
+        });
       } else {
-        next()
+        next();
       }
     } else {
-      next()
+      next();
     }
-  })
-})
+  });
+});
 
-export default router
+export default router;

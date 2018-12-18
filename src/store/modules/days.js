@@ -1,9 +1,9 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import { db } from '@/main'
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { db } from '@/main';
 
 const initialState = {
-  data: []
+  data: [],
 };
 
 const getters = {};
@@ -23,7 +23,7 @@ async function getEventItemsByDayId({ tripId, dayId }) {
 
 const actions = {
   fetchDays: async ({ commit }, tripId) => {
-    if (!tripId) { return }
+    if (!tripId) { return; }
     try {
       const daysRef = await db.doc(`trips/${tripId}`).collection('days').get();
       const dayDocs = daysRef.docs;
@@ -36,18 +36,18 @@ const actions = {
         return eventItemsPromise.then((eventItems) => {
           day.event = eventItems;
           days.push(day);
-          return day
-        })
+          return day;
+        });
       })).then(values => commit('setDays', values));
     } catch (error) {
-      throw Error(error)
+      throw Error(error);
     }
   },
   createDay: ({ commit }, tripId) => {
-    if (!tripId) { return }
-    const tripDocument = db.doc(`trips/${tripId}`)
+    if (!tripId) { return; }
+    const tripDocument = db.doc(`trips/${tripId}`);
     tripDocument.collection('days').add({
-      created: firebase.firestore.FieldValue.serverTimestamp()
+      created: firebase.firestore.FieldValue.serverTimestamp(),
     }).then(async () => {
       try {
         const updatedDays = await db.doc(`trips/${tripId}`).collection('days').get();
@@ -61,18 +61,18 @@ const actions = {
           return eventItemsPromise.then((eventItems) => {
             day.event = eventItems;
             days.push(day);
-            return day
-          })
+            return day;
+          });
         })).then(values => commit('setDays', values));
       } catch (error) {
-        throw Error(error)
+        throw Error(error);
       }
-    })
+    });
   },
   removeDay: async ({ commit }, { tripId, dayId }) => {
     db.doc(`trips/${tripId}`).collection('days').doc(`${dayId}`).delete();
     try {
-      const updatedDays = await db.doc(`trips/${tripId}`).collection('days').get()
+      const updatedDays = await db.doc(`trips/${tripId}`).collection('days').get();
       const dayDocs = updatedDays.docs;
       const days = [];
       Promise.all(dayDocs.map((doc) => {
@@ -83,18 +83,18 @@ const actions = {
         return eventItemsPromise.then((eventItems) => {
           day.event = eventItems;
           days.push(day);
-          return day
-        })
+          return day;
+        });
       })).then(values => commit('setDays', values));
     } catch (error) {
-      throw Error(error)
+      throw Error(error);
     }
   },
 };
 
 const mutations = {
   setDays: (state, days) => {
-    state.data = days
+    state.data = days;
   },
 };
 
@@ -103,5 +103,5 @@ export default {
   state: initialState,
   getters,
   actions,
-  mutations
-}
+  mutations,
+};

@@ -10,17 +10,17 @@
 </template>
 
 <script>
-import VAvatar from './VAvatar'
+import VAvatar from './VAvatar';
 
 export default {
   props: {
     users: {
       type: Array,
-    }
+    },
   },
 
   components: {
-    VAvatar
+    VAvatar,
   },
-}
+};
 </script>

@@ -21,19 +21,19 @@
 </template>
 
 <script type="text/javascript">
-import { mapGetters, mapState } from 'vuex'
-import moment from 'moment'
-import { HomeIcon, NavigationIcon, SunIcon } from 'vue-feather-icons'
-import VButton from '@/components/VButton'
-import Input from '@/components/Input'
-import Chat from '@/components/Chat'
-import Event from './Plan/Event'
-import Lodging from './Plan/Lodging'
-import Transportation from './Plan/Transportation'
-import ModalUpdatePlan from './ModalUpdatePlan'
-import Header from './Header'
-import TripItinerary from './TripItinerary'
-import MainEventForm from './EventForm/MainEventForm'
+import { mapGetters, mapState } from 'vuex';
+import moment from 'moment';
+import { HomeIcon, NavigationIcon, SunIcon } from 'vue-feather-icons';
+import VButton from '@/components/VButton';
+import Input from '@/components/Input';
+import Chat from '@/components/Chat';
+import Event from './Plan/Event';
+import Lodging from './Plan/Lodging';
+import Transportation from './Plan/Transportation';
+import ModalUpdatePlan from './ModalUpdatePlan';
+import Header from './Header';
+import TripItinerary from './TripItinerary';
+import MainEventForm from './EventForm/MainEventForm';
 
 export default {
   components: {
@@ -49,18 +49,18 @@ export default {
     'v-chat': Chat,
     VButton,
     'v-input': Input,
-    MainEventForm
+    MainEventForm,
   },
   data() {
     return {
       party: [
         {
           name: 'Rodney Dennis',
-          imgUrl: 'https://placehold.it/100'
+          imgUrl: 'https://placehold.it/100',
         },
         {
           name: 'Taylor Dennis',
-          imgUrl: 'https://placehold.it/100'
+          imgUrl: 'https://placehold.it/100',
         },
       ],
 
@@ -73,7 +73,7 @@ export default {
         transportationLocation: false,
         transportationStartTime: false,
         transportationEndTime: false,
-        eventLocation: false
+        eventLocation: false,
       },
       invitee: '',
       venuePhotosIndex: 0,
@@ -90,9 +90,9 @@ export default {
       autoComplete: {
         depart: '🛫  Departure Airport...',
         arrive: '🛬  Arrival Airport...',
-        airline: '✈️  Filter results by airline...'
-      }
-    }
+        airline: '✈️  Filter results by airline...',
+      },
+    };
   },
   created() {
     const tripId = this.$route.params.id;
@@ -101,55 +101,55 @@ export default {
   },
   filters: {
     humanTripDate(date) {
-      return moment(date).format('MMMM Do YYYY')
+      return moment(date).format('MMMM Do YYYY');
     },
     humanTime(time) {
       if (moment(time, 'HH:mm').format('h:mm A') !== 'Invalid date') {
-        return moment(time, 'HH:mm').format('h:mm A')
+        return moment(time, 'HH:mm').format('h:mm A');
       }
-      return '-'
+      return '-';
     },
     humanUnixTime(time) {
-      return moment(moment.unix(time)).utc().format('h:mm A')
-    }
+      return moment(moment.unix(time)).utc().format('h:mm A');
+    },
   },
   computed: {
     minTime() {
       if (this.date === this.end_date) {
-        return this.newPlan.start
+        return this.newPlan.start;
       }
-      return null
+      return null;
     },
     ...mapState(['days']),
-    ...mapGetters(['showChat', 'currentTrip', 'plans', 'planCities', 'planAirlines', 'planAirports', 'newPlan', 'today', 'currentMaxEndDate', 'venues', 'venue', 'venuePhotos'])
+    ...mapGetters(['showChat', 'currentTrip', 'plans', 'planCities', 'planAirlines', 'planAirports', 'newPlan', 'today', 'currentMaxEndDate', 'venues', 'venue', 'venuePhotos']),
   },
   directives: {
     focus: {
       inserted(el) {
-        el.focus()
-      }
+        el.focus();
+      },
     },
     'click-outside': {
       bind: (el, binding) => {
         // Define Handler and cache it on the element
         const handler = (e) => {
           if (!el.contains(e.target) && el !== e.target) {
-            binding.value(e)
+            binding.value(e);
           }
         };
         const element = el;
         element.vueClickOutside = handler;
         // add Event Listeners
-        document.addEventListener('click', handler)
+        document.addEventListener('click', handler);
       },
 
       unbind: (el) => {
         // Remove Event Listeners
         const element = el;
         document.removeEventListener('click', element.vueClickOutside);
-        element.vueClickOutside = null
-      }
-    }
+        element.vueClickOutside = null;
+      },
+    },
   },
   methods: {
     handleSendInvitation() {
@@ -157,14 +157,14 @@ export default {
         trip: this.$route.params.id,
         members: this.$store.state.trip.currentTrip.party,
         email: this.invitee,
-      })
+      });
     },
   },
 
   mounted() {
     this.$parent.$on('foo', (x) => {
-      this.showChat = x
-    })
+      this.showChat = x;
+    });
   },
 
   destroyed() {
@@ -174,7 +174,7 @@ export default {
     this.$store.commit('clearAddTransportation');
     this.$store.commit('clearAddPlan');
     this.$store.state.trip.venues = {};
-    this.$store.state.trip.currentTrip = {}
-  }
-}
+    this.$store.state.trip.currentTrip = {};
+  },
+};
 </script>

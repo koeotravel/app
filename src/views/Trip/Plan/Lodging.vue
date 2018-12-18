@@ -9,17 +9,17 @@
 </template>
 
 <script>
-import Main from './main'
+import Main from './main';
 
 export default {
   components: {
-    'v-plan': Main
+    'v-plan': Main,
   },
   props: {
     details: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
-  }
-}
+  },
+};
 </script>

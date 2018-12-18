@@ -77,65 +77,65 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import moment from 'moment'
-import { EditIcon } from 'vue-feather-icons'
+import { mapGetters } from 'vuex';
+import moment from 'moment';
+import { EditIcon } from 'vue-feather-icons';
 
 export default {
   components: {
-    EditIcon
+    EditIcon,
   },
   data() {
     return {
       showEditHover: {
         name: false,
         dates: false,
-        description: false
+        description: false,
       },
       showInput: {
         name: false,
         dates: false,
         description: false,
-      }
-    }
+      },
+    };
   },
   methods: {
     openInlineEdit(tripInput) {
       if (tripInput === 'tripName') {
-        this.showInput.name = true
+        this.showInput.name = true;
       }
       if (tripInput === 'tripDates') {
-        this.showInput.dates = true
+        this.showInput.dates = true;
       }
       if (tripInput === 'tripDescription') {
-        this.showInput.description = true
+        this.showInput.description = true;
       }
-    }
+    },
   },
   computed: {
     minTime() {
       if (this.date === this.end_date) {
-        return this.newPlan.start
+        return this.newPlan.start;
       }
-      return null
+      return null;
     },
-    ...mapGetters(['showChat', 'currentTrip', 'days', 'plans', 'planCities', 'newPlan', 'today', 'currentMaxEndDate', 'venues', 'venue', 'venuePhotos'])
+    ...mapGetters(['showChat', 'currentTrip', 'days', 'plans', 'planCities', 'newPlan', 'today', 'currentMaxEndDate', 'venues', 'venue', 'venuePhotos']),
   },
   filters: {
     humanTripDate(date) {
       if (date === 'Pre-Trip') {
-        return 'Pre-Trip'
+        return 'Pre-Trip';
       }
-      return moment(date).format('MMMM Do YYYY')
+      return moment(date).format('MMMM Do YYYY');
     },
     humanTime(time) {
       if (moment(time, 'HH:mm').format('h:mm A') !== 'Invalid date') {
-        return moment(time, 'HH:mm').format('h:mm A')
+        return moment(time, 'HH:mm').format('h:mm A');
       }
-      return '-'
-    }
-  }
-}
+      return '-';
+    },
+  },
+};
 </script>
 
 <style lang="css">

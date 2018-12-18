@@ -39,14 +39,14 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import Unsplash, { toJson } from 'unsplash-js'
+import { mapActions, mapState } from 'vuex';
+import Unsplash, { toJson } from 'unsplash-js';
 
 const unsplash = new Unsplash({
   applicationId: '301382d5663e6043af8bb281b504459890c41a97a921be0e1d3c1f60d9d8d940',
   secret: 'bf18a083c2fcac2843da10f311839a078580ad6de58bfbe8385fa71b3f449f31',
   callbackUrl: 'urn:ietf:wg:oauth:2.0:oob',
-})
+});
 
 export default {
   props: ['tripId'],
@@ -77,33 +77,33 @@ export default {
           username: '',
           imageIndex: '',
         },
-        members: []
-      }
-    }
+        members: [],
+      },
+    };
   },
   created() {
     unsplash.photos.getRandomPhoto({ query: 'plane' })
       .then(toJson)
       .then((response) => {
-        this.eventTransport.image.imageUrl = response.urls.regular
-        this.eventTransport.image.username = response.user.name
-        this.eventTransport.image.imageAuthorUrl = `https://unsplash.com/@${response.user.username}?utm_source=your_app_name&utm_medium=referral`
-      })
+        this.eventTransport.image.imageUrl = response.urls.regular;
+        this.eventTransport.image.username = response.user.name;
+        this.eventTransport.image.imageAuthorUrl = `https://unsplash.com/@${response.user.username}?utm_source=your_app_name&utm_medium=referral`;
+      });
   },
   methods: {
     ...mapActions(['createPlan']),
     handleCreateEvent(tripId, day, eventTransport) {
-      if(!day){ return }
+      if (!day) { return; }
       const event = {
         tripId,
         dayId: JSON.parse(day).id,
-        eventObject: eventTransport
+        eventObject: eventTransport,
       };
-      this.createPlan(event)
-    }
+      this.createPlan(event);
+    },
   },
   computed: {
     ...mapState(['days']),
-  }
-}
+  },
+};
 </script>

@@ -38,12 +38,12 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex';
 import {
   VAvatar,
   VButton,
   VHr,
-} from '.'
+} from '.';
 
 export default {
   components: {
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       url: '',
-    }
+    };
   },
 
   computed: {
@@ -66,5 +66,5 @@ export default {
   methods: {
     ...mapActions(['logout', 'getAvatar']),
   },
-}
+};
 </script>

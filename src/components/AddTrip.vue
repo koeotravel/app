@@ -69,20 +69,20 @@
 </style>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
-import { XIcon, ShuffleIcon } from 'vue-feather-icons'
-import moment from 'moment'
-import Unsplash, { toJson } from 'unsplash-js'
-import { VDatePicker } from '@/components'
-import VButton from '@/components/VButton'
-import Input from '@/components/Input'
-import VFieldset from '@/components/VFieldset'
+import { mapGetters, mapMutations } from 'vuex';
+import { XIcon, ShuffleIcon } from 'vue-feather-icons';
+import moment from 'moment';
+import Unsplash, { toJson } from 'unsplash-js';
+import { VDatePicker } from '@/components';
+import VButton from '@/components/VButton';
+import Input from '@/components/Input';
+import VFieldset from '@/components/VFieldset';
 
 const unsplash = new Unsplash({
   applicationId: '301382d5663e6043af8bb281b504459890c41a97a921be0e1d3c1f60d9d8d940',
   secret: 'bf18a083c2fcac2843da10f311839a078580ad6de58bfbe8385fa71b3f449f31',
   callbackUrl: 'urn:ietf:wg:oauth:2.0:oob',
-})
+});
 
 export default {
   components: {
@@ -91,40 +91,40 @@ export default {
     VFieldset,
     VButton,
     VDatePicker,
-    'v-input': Input
+    'v-input': Input,
   },
 
   data() {
     return {
       startDate: moment().format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
-    }
+    };
   },
 
   mounted() {
     document.addEventListener('keydown', (e) => {
       if (this.$store.state.dashboard.showTripModal === true && e.keyCode === 27) {
-        this.$store.commit('closeTripModal')
+        this.$store.commit('closeTripModal');
         if (this.$route.name === 'Dashboard') {
-          this.$store.commit('clearAddTrip')
+          this.$store.commit('clearAddTrip');
         }
       }
-    })
+    });
   },
 
   computed: {
     ...mapGetters(['newTrip', 'today', 'newMaxEndDate']),
-    currentDate: () => moment().format('YYYY-MM-DD')
+    currentDate: () => moment().format('YYYY-MM-DD'),
   },
 
   created() {
     unsplash.photos.getRandomPhoto({ query: 'travel' })
       .then(toJson)
       .then((response) => {
-        this.newTrip.img = response.urls.regular
-        this.newTrip.img_author = response.user.name
-        this.newTrip.img_author_url = `https://unsplash.com/@${response.user.username}?utm_source=your_app_name&utm_medium=referral`
-      })
+        this.newTrip.img = response.urls.regular;
+        this.newTrip.img_author = response.user.name;
+        this.newTrip.img_author_url = `https://unsplash.com/@${response.user.username}?utm_source=your_app_name&utm_medium=referral`;
+      });
   },
 
   methods: {
@@ -133,22 +133,22 @@ export default {
       unsplash.photos.getRandomPhoto({ query: 'travel' })
         .then(toJson)
         .then((response) => {
-          this.newTrip.img = response.urls.regular
-          this.newTrip.img_author = response.user.name
-          this.newTrip.img_author_url = `https://unsplash.com/${response.user.username}?utm_source=koeo&utm_medium=referral&utm_campaign=api-credit`
-        })
+          this.newTrip.img = response.urls.regular;
+          this.newTrip.img_author = response.user.name;
+          this.newTrip.img_author_url = `https://unsplash.com/${response.user.username}?utm_source=koeo&utm_medium=referral&utm_campaign=api-credit`;
+        });
     },
     handleAddTrip() {
-        const attributes = {
+      const attributes = {
         trip: this.$store.state.dashboard.newTrip,
         userId: this.$store.state.user.data.uid,
         userEmail: this.$store.state.user.data.email,
         startDate: this.startDate,
         endDate: this.endDate,
-      }
-      this.$store.dispatch('addTrip', attributes)
-      this.$store.commit('closeModal')
+      };
+      this.$store.dispatch('addTrip', attributes);
+      this.$store.commit('closeModal');
     },
   },
-}
+};
 </script>

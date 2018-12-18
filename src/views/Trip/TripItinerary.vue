@@ -24,16 +24,15 @@
 </template>
 
 <script>
-import { VButton } from '@/components'
-import { mapActions, mapState } from 'vuex'
+import { VButton } from '@/components';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   components: { VButton },
   props: ['days', 'tripId'],
   methods: {
     ...mapActions(['createDay', 'removeDay']),
-    ...mapState(['events'])
+    ...mapState(['events']),
   },
-}
+};
 </script>
-

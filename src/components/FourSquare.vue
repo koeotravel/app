@@ -58,13 +58,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { XIcon } from 'vue-feather-icons'
+import { mapGetters } from 'vuex';
+import { XIcon } from 'vue-feather-icons';
 
 
 export default {
   components: {
-    XIcon
+    XIcon,
   },
   data() {
     return {
@@ -73,69 +73,68 @@ export default {
         transportationLocation: false,
         transportationStartTime: false,
         transportationEndTime: false,
-        eventLocation: false
-      }
-    }
+        eventLocation: false,
+      },
+    };
   },
   methods: {
     displayVenues(location, query) {
-      this.$store.dispatch('fetchVenues', { location, query })
+      this.$store.dispatch('fetchVenues', { location, query });
     },
     displayMatches(query) {
       function findMatches(wordToMatch, cities) {
         return cities.filter((place) => {
-          const regex = new RegExp(wordToMatch, 'gi')
-          return place.city.match(regex) || place.state.match(regex)
-        })
+          const regex = new RegExp(wordToMatch, 'gi');
+          return place.city.match(regex) || place.state.match(regex);
+        });
       }
-      const matchArray = findMatches(query, this.planCities)
+      const matchArray = findMatches(query, this.planCities);
       const cityState = matchArray.map((place) => {
-        const cityName = place.city
-        const stateName = place.state
-        return `${cityName}, ${stateName}`
-      })
-      this.planCity = cityState.slice(0, 10)
+        const cityName = place.city;
+        const stateName = place.state;
+        return `${cityName}, ${stateName}`;
+      });
+      this.planCity = cityState.slice(0, 10);
       if (this.newPlan.searchCity === '') {
-        this.newPlan.searchVenue = ''
+        this.newPlan.searchVenue = '';
       }
     },
     checkVenue(planVenue) {
-      const eventPlans = this.plans.filter(plan => plan.type === 'event')
-      const venuePlans = eventPlans.filter(plan =>
-        plan.venue.location.address === planVenue.venue.location.address)
-      if (planVenue.venue.location.address === this.venue.location.address ||
-        venuePlans.length > 0) {
-        return false
+      const eventPlans = this.plans.filter(plan => plan.type === 'event');
+      const venuePlans = eventPlans.filter(plan => plan.venue.location.address === planVenue.venue.location.address);
+      if (planVenue.venue.location.address === this.venue.location.address
+        || venuePlans.length > 0) {
+        return false;
       }
-      return true
+      return true;
     },
     handlePlanVenue(venue) {
-      this.venuePhotosIndex = 0
-      this.$store.dispatch('fetchVenueById', venue.id)
-      this.$store.dispatch('fetchVenuePhotos', venue.id)
-      this.disableInput.eventLocation = true
-      this.newPlan.eventName = venue.name
-      this.newPlan.eventLocation = `${venue.location.address} ${venue.location.city}, ${venue.location.state} ${venue.location.postalCode}`
+      this.venuePhotosIndex = 0;
+      this.$store.dispatch('fetchVenueById', venue.id);
+      this.$store.dispatch('fetchVenuePhotos', venue.id);
+      this.disableInput.eventLocation = true;
+      this.newPlan.eventName = venue.name;
+      this.newPlan.eventLocation = `${venue.location.address} ${venue.location.city}, ${venue.location.state} ${venue.location.postalCode}`;
       if (venue.photos.count !== 0) {
-        this.newPlan.img = `${venue.photos.groups[0].items[0].prefix}${venue.photos.groups[0].items[0].width}x${venue.photos.groups[0].items[0].height}${venue.photos.groups[0].items[0].suffix}`
+        this.newPlan.img = `${venue.photos.groups[0].items[0].prefix}${venue.photos.groups[0].items[0].width}x${venue.photos.groups[0].items[0].height}${venue.photos.groups[0].items[0].suffix}`;
       }
       if (venue.url) {
-        this.newPlan.url = venue.url
+        this.newPlan.url = venue.url;
       }
-      this.newPlan.eventVenue = venue
+      this.newPlan.eventVenue = venue;
     },
     handleClearEventInput(input) {
       if (input === 'city') {
-        this.newPlan.searchCity = ''
-        this.newPlan.searchVenue = ''
+        this.newPlan.searchCity = '';
+        this.newPlan.searchVenue = '';
       }
       if (input === 'venue') {
-        this.newPlan.searchVenue = ''
+        this.newPlan.searchVenue = '';
       }
-    }
+    },
   },
   computed: {
-    ...mapGetters(['plans', 'planCities', 'newPlan', 'venues', 'venue', 'venuePhotos'])
-  }
-}
+    ...mapGetters(['plans', 'planCities', 'newPlan', 'venues', 'venue', 'venuePhotos']),
+  },
+};
 </script>

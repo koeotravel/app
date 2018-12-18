@@ -60,32 +60,32 @@
 </style>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
       message: '',
       chatId: this.$route.params.id,
-      errorMess: ''
-    }
+      errorMess: '',
+    };
   },
 
   methods: {
     handleToggleChat() {
-      this.$store.commit('toggleChat')
+      this.$store.commit('toggleChat');
     },
     handleSendMessage(text) {
-      const message = { text, chatId: this.chatId }
-      this.$store.dispatch('send', message)
+      const message = { text, chatId: this.chatId };
+      this.$store.dispatch('send', message);
     },
   },
   created() {
-    const id = { chatId: this.chatId }
-    this.$store.dispatch('fetchMessages', id)
+    const id = { chatId: this.chatId };
+    this.$store.dispatch('fetchMessages', id);
   },
   computed: {
-    ...mapGetters(['messages', 'currentUser'])
-  }
-}
+    ...mapGetters(['messages', 'currentUser']),
+  },
+};
 </script>

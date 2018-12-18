@@ -1,14 +1,14 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import moment from 'moment'
-import { db } from '@/main'
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import moment from 'moment';
+import { db } from '@/main';
 
 const initialState = {
   venues: [],
   venue: {
     location: {
-      address: ''
-    }
+      address: '',
+    },
   },
   venuePhotos: [],
   days: [],
@@ -23,8 +23,8 @@ const initialState = {
     eventLocation: '',
     eventVenue: {
       location: {
-        address: ''
-      }
+        address: '',
+      },
     },
     url: '',
     img: '',
@@ -51,16 +51,16 @@ const initialState = {
     transportationStartTime: '',
     transportationEndTime: '',
     transportationPrice: '',
-    transportationDescription: ''
+    transportationDescription: '',
   },
   currentPlan: {},
   currentMaxEndDate: '',
   planFlights: {
     0: {
-      data: {}
-    }
-  }
-}
+      data: {},
+    },
+  },
+};
 
 const getters = {
   days: state => state.days,
@@ -69,60 +69,60 @@ const getters = {
   newPlan: state => state.newPlan,
   currentPlan: state => state.currentPlan,
   currentMaxEndDate: () => {
-    const currentDate = moment(initialState.currentTrip.start)
+    const currentDate = moment(initialState.currentTrip.start);
     let oneMonth = currentDate.add(34, 'days');
     oneMonth = moment(oneMonth).format('YYYY-MM-DD');
-    return oneMonth
+    return oneMonth;
   },
   planCities: () => {
-    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json'
-    const cities = []
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    const cities = [];
     fetch(endpoint)
       .then(blob => blob.json())
-      .then(data => cities.push(...data))
-    return cities
+      .then(data => cities.push(...data));
+    return cities;
   },
   planAirlines: () => {
-    const endpoint = 'https://api.skypicker.com/airlines'
-    const airlines = []
+    const endpoint = 'https://api.skypicker.com/airlines';
+    const airlines = [];
     fetch(endpoint)
       .then(blob => blob.json())
-      .then(data => airlines.push(...data))
-    return airlines
+      .then(data => airlines.push(...data));
+    return airlines;
   },
   planAirports: () => {
-    const endpoint = 'https://raw.githubusercontent.com/jbrooksuk/JSON-Airports/master/airports.json'
-    const airports = []
+    const endpoint = 'https://raw.githubusercontent.com/jbrooksuk/JSON-Airports/master/airports.json';
+    const airports = [];
     fetch(endpoint)
       .then(blob => blob.json())
-      .then(data => airports.push(...data))
-    return airports
+      .then(data => airports.push(...data));
+    return airports;
   },
-  planFlights: s => s.planFlights
-}
+  planFlights: s => s.planFlights,
+};
 
 const actions = {
   sendInvitation: (context, { trip, members = {}, email }) => {
-    const tripDocRef = db.collection('trips').doc(trip)
+    const tripDocRef = db.collection('trips').doc(trip);
     db.collection('users')
       .where('email', '==', email)
       .get()
       .then((userCol) => {
-        const invitedUserId = userCol.docs.map(user => user.ref.id).pop()
+        const invitedUserId = userCol.docs.map(user => user.ref.id).pop();
         members[invitedUserId] = true // eslint-disable-line
         tripDocRef.update({
-          members
-        })
+          members,
+        });
         tripDocRef.collection('invitations').doc(`${email}`).set({
           created: firebase.firestore.FieldValue.serverTimestamp(),
-          rsvp: null
-        })
+          rsvp: null,
+        });
       })
       .catch((error) => {
         if (error) {
-          throw new Error(error)
+          throw new Error(error);
         }
-      })
+      });
   },
 
   fetchTrip: ({ commit }, tripId) => {
@@ -130,35 +130,35 @@ const actions = {
       .doc(tripId)
       .get()
       .then((response) => {
-        commit('setTrip', response.data())
-        commit('setAddPlan', response.data().start)
-      })
+        commit('setTrip', response.data());
+        commit('setAddPlan', response.data().start);
+      });
     db.collection('trips')
       .doc(tripId)
       .onSnapshot((response) => {
-        commit('setTrip', response.data())
-      })
+        commit('setTrip', response.data());
+      });
   },
   updatePlan: ({ commit }, attributes) => {
-    const tripId = attributes.tripId
-    const plan = attributes.plan
+    const tripId = attributes.tripId;
+    const plan = attributes.plan;
     db.collection('trips')
       .doc(tripId)
       .collection('plans')
       .doc(attributes.plan.id)
-      .update(plan)
-    commit()
+      .update(plan);
+    commit();
   },
 
   deletePlan: ({ commit }, attributes) => {
-    const tripId = attributes.tripId
-    const planId = attributes.planId
+    const tripId = attributes.tripId;
+    const planId = attributes.planId;
     db.collection('trips')
       .doc(tripId)
       .collection('plans')
       .doc(planId)
-      .delete()
-    commit()
+      .delete();
+    commit();
   },
 
   fetchFlights: ({ commit }, attributes) => {
@@ -169,109 +169,109 @@ const actions = {
       departureDate,
       departureYear,
       filterTime,
-      filterAirline
-    ) => `https://api.skypicker.com/flights?flyFrom=${departureAirport}&to=${arrivalAirport}&dateFrom=${departureDate}%2F${departureMonth}%2F${departureYear}&dateTo=${departureDate}%2F${departureMonth}%2F${departureYear}${filterTime}&selectedAirlines=${filterAirline}&sort=date`
-    const dateMM = moment(initialState.newPlan.date).format('MM')
-    const dateDD = moment(initialState.newPlan.date).format('DD')
-    const dateYYYY = moment(initialState.newPlan.date).format('YYYY')
-    let time = ''
+      filterAirline,
+    ) => `https://api.skypicker.com/flights?flyFrom=${departureAirport}&to=${arrivalAirport}&dateFrom=${departureDate}%2F${departureMonth}%2F${departureYear}&dateTo=${departureDate}%2F${departureMonth}%2F${departureYear}${filterTime}&selectedAirlines=${filterAirline}&sort=date`;
+    const dateMM = moment(initialState.newPlan.date).format('MM');
+    const dateDD = moment(initialState.newPlan.date).format('DD');
+    const dateYYYY = moment(initialState.newPlan.date).format('YYYY');
+    let time = '';
     if (initialState.newPlan.searchTime !== '') {
-      const timeHH = initialState.newPlan.searchTime.substring(0, 2)
-      const timeMM = initialState.newPlan.searchTime.substr(initialState.newPlan.searchTime.length - 2)
-      time = `&dtimefrom=${timeHH}%3A${timeMM}`
+      const timeHH = initialState.newPlan.searchTime.substring(0, 2);
+      const timeMM = initialState.newPlan.searchTime.substr(initialState.newPlan.searchTime.length - 2);
+      time = `&dtimefrom=${timeHH}%3A${timeMM}`;
     }
     const flights = [
       {
-        data: {}
-      }
-    ]
-    const endpoint = flightURL(attributes.depart, attributes.arrive, dateMM, dateDD, dateYYYY, time, attributes.airline)
+        data: {},
+      },
+    ];
+    const endpoint = flightURL(attributes.depart, attributes.arrive, dateMM, dateDD, dateYYYY, time, attributes.airline);
     fetch(endpoint)
       .then(blob => blob.json())
-      .then(data => flights.push(data))
-    commit('setFlights', flights)
-  }
-}
+      .then(data => flights.push(data));
+    commit('setFlights', flights);
+  },
+};
 
 const mutations = {
   setTrip: (state, trip) => {
-    state.currentTrip = trip
+    state.currentTrip = trip;
   },
 
   setAddPlan: (state, start) => {
-    state.newPlan.date = start
-    state.newPlan.end_date = start
+    state.newPlan.date = start;
+    state.newPlan.end_date = start;
   },
 
   clearVenue: (state) => {
-    state.venue = { location: { address: '' } }
-    state.venuePhotos = []
+    state.venue = { location: { address: '' } };
+    state.venuePhotos = [];
   },
 
   setFlights: (state, flights) => {
-    state.planFlights = flights
+    state.planFlights = flights;
   },
 
   clearAddEvent: (state) => {
-    state.newPlan.eventName = ''
-    state.newPlan.eventLocation = ''
-    state.newPlan.eventVenue = { location: { address: '' } }
-    state.newPlan.url = ''
-    state.newPlan.img = ''
-    state.newPlan.eventTime = ''
-    state.newPlan.eventPrice = ''
-    state.newPlan.eventDescription = ''
+    state.newPlan.eventName = '';
+    state.newPlan.eventLocation = '';
+    state.newPlan.eventVenue = { location: { address: '' } };
+    state.newPlan.url = '';
+    state.newPlan.img = '';
+    state.newPlan.eventTime = '';
+    state.newPlan.eventPrice = '';
+    state.newPlan.eventDescription = '';
   },
 
   clearAddLodging: (state) => {
-    state.newPlan.lodgingName = ''
-    state.newPlan.lodgingLocation = ''
+    state.newPlan.lodgingName = '';
+    state.newPlan.lodgingLocation = '';
     if (state.newPlan.img === state.currentTrip.img) {
-      state.newPlan.img = ''
+      state.newPlan.img = '';
     }
-    state.newPlan.lodgingStartTime = ''
-    state.newPlan.lodgingEndTime = ''
-    state.newPlan.lodgingPrice = ''
-    state.newPlan.lodgingDescription = ''
+    state.newPlan.lodgingStartTime = '';
+    state.newPlan.lodgingEndTime = '';
+    state.newPlan.lodgingPrice = '';
+    state.newPlan.lodgingDescription = '';
   },
 
   clearAddTransportation: (state) => {
-    state.newPlan.transportationFlight = {}
-    state.newPlan.transportationName = ''
-    state.newPlan.transportationLocation = ''
+    state.newPlan.transportationFlight = {};
+    state.newPlan.transportationName = '';
+    state.newPlan.transportationLocation = '';
     if (state.newPlan.img === state.currentTrip.img) {
-      state.newPlan.img = ''
+      state.newPlan.img = '';
     }
-    state.newPlan.transportationStartTime = ''
-    state.newPlan.transportationEndTime = ''
-    state.newPlan.transportationPrice = ''
-    state.newPlan.transportationDescription = ''
+    state.newPlan.transportationStartTime = '';
+    state.newPlan.transportationEndTime = '';
+    state.newPlan.transportationPrice = '';
+    state.newPlan.transportationDescription = '';
   },
 
   clearAddPlan: (state) => {
-    state.newPlan.searchDepart = ''
-    state.newPlan.searchArrive = ''
-    state.newPlan.searchAirline = ''
-    state.newPlan.searchTime = ''
-    state.newPlan.searchCity = ''
-    state.newPlan.searchVenue = ''
-    state.newPlan.date = ''
-    state.newPlan.end_date = ''
-    state.newPlan.type = 'event'
+    state.newPlan.searchDepart = '';
+    state.newPlan.searchArrive = '';
+    state.newPlan.searchAirline = '';
+    state.newPlan.searchTime = '';
+    state.newPlan.searchCity = '';
+    state.newPlan.searchVenue = '';
+    state.newPlan.date = '';
+    state.newPlan.end_date = '';
+    state.newPlan.type = 'event';
   },
 
   setPlan: (state, plan) => {
-    state.currentPlan = plan
+    state.currentPlan = plan;
   },
   closePlanModal: (state) => {
-    document.body.classList.remove('overflow-hidden')
-    state.currentPlan = {}
-  }
-}
+    document.body.classList.remove('overflow-hidden');
+    state.currentPlan = {};
+  },
+};
 
 export default {
   state: initialState,
   getters,
   actions,
-  mutations
-}
+  mutations,
+};
