@@ -51,6 +51,8 @@ export default {
   methods: {
     handleSignup(email, password) {
       this.$store.dispatch('signup', { email, password })
+      this.email = ''
+      this.password = ''
     },
   },
 }
