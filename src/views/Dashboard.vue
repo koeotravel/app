@@ -24,7 +24,6 @@
 
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
-import moment from 'moment'
 import { VAvatarStack } from '@/components'
 import AddTrip from '@/components/AddTrip'
 import VButton from '@/components/VButton'

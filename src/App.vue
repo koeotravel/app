@@ -1,19 +1,18 @@
 <template>
-  <main>
+  <div class="site">
     <v-app-bar></v-app-bar>
-    <router-view></router-view>
-    <ModalContainer v-show="$store.state.showModal"/>
-  </main>
+    <main class="site-content">
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 
 <script>
 import VAppBar from './components/VAppBar'
-import ModalContainer from './components/ModalContainer'
 
 export default {
   components: {
     VAppBar,
-    ModalContainer
   }
 }
 </script>

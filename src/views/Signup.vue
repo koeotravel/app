@@ -1,20 +1,28 @@
 <template>
-  <form @submit.prevent="handleSignup(email, password)" class="mw16 gutters">
-    <h1>Create your account</h1>
-    <v-fieldset>
-      <div class="form-group">
-        <v-input-email v-model="email" />
-      </div>
-      <div class="form-group">
-        <v-input-password v-model="password" />
-      </div>
-    </v-fieldset>
+  <div class="ph3 mv3">
+    <h1 class="serif normal f1 ma0 mb4">Create an account</h1>
 
-    <button type="submit" class="btn mr4">Sign up</button>
-    <router-link :to="{name: 'login'}">
-      <button type="submit" class="btn btn-2">Log in &rarr;</button>
-    </router-link>
-  </form>
+    <form class="measure-narrow" @submit.prevent="handleSignup(email, password)">
+      <v-fieldset>
+        <div class="form-group">
+          <v-input-email v-model="email" />
+        </div>
+
+        <div class="form-group">
+          <v-input-password v-model="password" />
+        </div>
+      </v-fieldset>
+
+      <button type="submit" class="btn mr3">Sign up</button>
+
+      <p class="f6 ma0 mt3">
+        Have an account?
+        <router-link :to="{name: 'login'}" class="link">
+          Log in &rarr;
+        </router-link>
+      </p>
+    </form>
+  </div>
 </template>
 
 <script>

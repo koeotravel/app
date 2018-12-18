@@ -1,14 +1,20 @@
 body {
   background: $white;
   color: $eggplant;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Inter UI', sans-serif;
-  font-size: $fs4;
-  margin: 0;
-  min-height: 100vh;
-  padding: 0;
 }
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+.mono { font-family: $mono; }
+.serif { font-family: $serif; }
 
 main {
   flex: 1;
@@ -25,3 +31,4 @@ main {
 .gutters {
   margin: 0 1.25rem;
 }
+

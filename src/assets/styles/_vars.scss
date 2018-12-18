@@ -1,23 +1,18 @@
 // Colors
-$eggplant: #2B2C5A;
-$eggplant-w: #C9CDE3;
-$lavender: #6C7CE8;
-$lavender-d: darken($lavender, 50%);
-$raspberry: #E5476D;
-$raspberry-d: darken($raspberry, 50%);
-$kiwi: #56D28F;
-$kiwi-d: darken($kiwi, 50%);
 $white: #fff;
-$black: #111;
+$black: #222;
 
-$fs1: .625rem;
-$fs2: .75rem;
-$fs3: .875rem;
-$fs4: 1rem;
+$eggplant: #2B2C5A;
+$eggplant-text: $white;
+$eggplant-washed: #E2E5FA;
+$lavender: #6C7CE8;
+$lavender-text: $eggplant;
+$mint: #56D28F;
+$mint-text: #1A402C;
+$banana: #F4C429;
+$banana-text: #40330B;
+$raspberry: #E5476D;
+$raspberry-text: #40141E;
 
-$s1: .625rem;
-$s2: .75rem;
-$s3: .875rem;
-$s4: 1rem;
-
-$box-shadow: 0 0 2rem $eggplant-w;
+$mono: 'IBM Plex Mono', monospace;
+$serif: 'IBM Plex Serif', serif;

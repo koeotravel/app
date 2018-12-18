@@ -5,7 +5,7 @@ fieldset {
 }
 
 ::placeholder {
-  color: $eggplant-w;
+  color: $eggplant-washed;
 }
 
 input[type="text"],
@@ -16,7 +16,7 @@ button, {
   border: none;
   border-radius: .25rem;
   font-family: inherit;
-  font-size: $fs3;
+  font-size: .875rem;
   line-height: 1;
   padding: .75rem 1rem;
 }
@@ -25,7 +25,7 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 textarea {
-  border: $eggplant-w solid .125rem;
+  border: $eggplant-washed solid .125rem;
   width: 100%;
   transition: .25s;
 
@@ -48,19 +48,14 @@ button {
 .btn {
   background-color: $eggplant;
   color: $white;
-  font-weight: 700;
 }
 
 .btn-2 {
-  background-color: $eggplant-w;
+  background-color: $eggplant-washed;
   color: $eggplant;
 }
 
 .btn-danger {
   background-color: $raspberry;
-  color: white;
-}
-
-.btn-pill {
-  border-radius: 9999px;
+  color: $white;
 }
