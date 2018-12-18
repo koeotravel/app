@@ -3,19 +3,24 @@
     <!-- List of trips -->
     <ul
       v-for="(trip, index) in trips"
-      :key="trip.id">
+      :key="trip.id"
+    >
       <li>
         <div>
-          <h3 v-if="trip.name">{{ trip.name }}</h3>
-          <v-avatar-stack :users="trip.party"></v-avatar-stack>
+          <h3 v-if="trip.name">
+            {{ trip.name }}
+          </h3>
+          <VAvatarStack :users="trip.party" />
         </div>
 
         <div>
-          <router-link :to="{ name: 'trip', params: { id: trip.id } }">
-            <v-button>Edit Trip</v-button>
-          </router-link>
+          <RouterLink :to="{ name: 'trip', params: { id: trip.id } }">
+            <VButton>Edit Trip</VButton>
+          </RouterLink>
 
-          <v-button :onClick="handleArchiveTrip(index, trip.archived)">Archive</v-button>
+          <VButton :on-click="handleArchiveTrip(index, trip.archived)">
+            Archive
+          </VButton>
         </div>
       </li>
     </ul>

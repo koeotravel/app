@@ -2,10 +2,18 @@
   <div class="w-100 flex-ns mb3">
     <aside class="w-25-ns w-100 tr-ns tl flex items-end-l items-start-m justify-end">
       <div class="w-100 pr3">
-        <h5 class="f6 bold label ma0">{{ leftTitleTop }}</h5>
-        <h4 class="f4 normal mt0 mb3">{{ leftSubtitleTop }}</h4>
-        <h5 class="f6 bold label ma0">{{ leftTitleBottom }}</h5>
-        <h4 class="f4 normal mt0 mb3">{{ leftSubtitleBottom }}</h4>
+        <h5 class="f6 bold label ma0">
+          {{ leftTitleTop }}
+        </h5>
+        <h4 class="f4 normal mt0 mb3">
+          {{ leftSubtitleTop }}
+        </h4>
+        <h5 class="f6 bold label ma0">
+          {{ leftTitleBottom }}
+        </h5>
+        <h4 class="f4 normal mt0 mb3">
+          {{ leftSubtitleBottom }}
+        </h4>
       </div>
     </aside>
     <article class="w-75-ns w-100 card-brand overflow-hidden">
@@ -16,14 +24,25 @@
             :style="{'background':'url('+details.img+') center'}"
             class="pa2 w-100 h-100-l cover flex items-end justify-start"
           >
-            <span class="br-100 w3 h3 o-80 flex items-center justify-center"
-              v-bind:class="{
+            <span
+              class="br-100 w3 h3 o-80 flex items-center justify-center"
+              :class="{
                 'bg-light-blue': isTransportation,
                 'bg-yellow': isLodging,
-                'bg-brand': isEvent }">
-              <navigation-icon v-show="isTransportation" class="white w2 h2"></navigation-icon>
-              <home-icon v-show="isLodging" class="white w2 h2"></home-icon>
-              <sun-icon v-show="isEvent" class="white w2 h2"></sun-icon>
+                'bg-brand': isEvent }"
+            >
+              <NavigationIcon
+                v-show="isTransportation"
+                class="white w2 h2"
+              />
+              <HomeIcon
+                v-show="isLodging"
+                class="white w2 h2"
+              />
+              <SunIcon
+                v-show="isEvent"
+                class="white w2 h2"
+              />
             </span>
           </div>
         </slot>
@@ -31,13 +50,15 @@
 
       <div class="tl w-70-l fr-l">
         <div class="flex items-center pa3 bb bw1 b--shadow-brand">
-          <h3 class="f4 ma0 normal w-100 measure-narrow db truncate">{{ details.name }}</h3>
-          <span class="flex-auto"></span>
+          <h3 class="f4 ma0 normal w-100 measure-narrow db truncate">
+            {{ details.name }}
+          </h3>
+          <span class="flex-auto" />
           <a @click="handlePlanModal(details.id)">
-            <edit-icon class='brand ml3 label pointer link dim"'></edit-icon>
+            <EditIcon class="brand ml3 label pointer link dim&quot;" />
           </a>
-          <a @click='handleDeletePlan(details.id)'>
-            <trash-2-icon class="ml3 label pointer link dim"></trash-2-icon>
+          <a @click="handleDeletePlan(details.id)">
+            <Trash2Icon class="ml3 label pointer link dim" />
           </a>
         </div>
         <div class="pa3">
@@ -46,7 +67,9 @@
               {{ details.location }}
             </slot>
           </h4>
-          <p class="f5 lh-copy multiline-truncate mb0">{{ details.description }}</p>
+          <p class="f5 lh-copy multiline-truncate mb0">
+            {{ details.description }}
+          </p>
         </div>
       </div>
     </article>
@@ -65,6 +88,33 @@ export default {
     SunIcon,
     EditIcon,
     Trash2Icon,
+  },
+
+  props: {
+    details: {
+      type: Object,
+      default: () => {},
+    },
+    layover: {
+      type: Object,
+      default: () => {},
+    },
+    leftTitleTop: {
+      type: String,
+      default: '',
+    },
+    leftSubtitleTop: {
+      type: String,
+      default: '',
+    },
+    leftTitleBottom: {
+      type: String,
+      default: '',
+    },
+    leftSubtitleBottom: {
+      type: String,
+      default: '',
+    },
   },
 
   computed: {
@@ -93,33 +143,6 @@ export default {
         planId,
       };
       this.$store.dispatch('deletePlan', attributes);
-    },
-  },
-
-  props: {
-    details: {
-      type: Object,
-      default: () => {},
-    },
-    layover: {
-      type: Object,
-      default: () => {},
-    },
-    leftTitleTop: {
-      type: String,
-      default: '',
-    },
-    leftSubtitleTop: {
-      type: String,
-      default: '',
-    },
-    leftTitleBottom: {
-      type: String,
-      default: '',
-    },
-    leftSubtitleBottom: {
-      type: String,
-      default: '',
     },
   },
 };

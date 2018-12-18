@@ -1,8 +1,10 @@
 <template>
   <header>
-    <HeaderImage/>
-    <button @click="handleInvites">invite</button>
-    <HeaderDetails/>
+    <HeaderImage />
+    <button @click="handleInvites">
+      invite
+    </button>
+    <HeaderDetails />
   </header>
 </template>
 

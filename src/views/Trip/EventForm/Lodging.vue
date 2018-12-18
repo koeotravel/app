@@ -1,29 +1,73 @@
 <template>
   <div>
-    <form @submit.prevent="handleCreateEvent(tripId, eventLodging.startDate, eventLodging)" >
+    <form @submit.prevent="handleCreateEvent(tripId, eventLodging.startDate, eventLodging)">
       <label>Check-in Date</label>
-        <select v-model="eventLodging.startDate" >
-          <option disabled value="">Please select one</option>
-          <option v-for="day in days.data" v-bind:key="day.id"> {{day}}</option>
-        </select>
+      <select v-model="eventLodging.startDate">
+        <option
+          disabled
+          value=""
+        >
+          Please select one
+        </option>
+        <option
+          v-for="day in days.data"
+          :key="day.id"
+        >
+          {{ day }}
+        </option>
+      </select>
       <label>Check-out Date</label>
-        <select v-model="eventLodging.endDate" >
-          <option disabled value="">Please select one</option>
-          <option v-for="(day, i) in days.data" v-bind:key="day.id"> Day {{ i + 1 }} - {{ day.date }}</option>
-        </select>
+      <select v-model="eventLodging.endDate">
+        <option
+          disabled
+          value=""
+        >
+          Please select one
+        </option>
+        <option
+          v-for="(day, i) in days.data"
+          :key="day.id"
+        >
+          Day {{ i + 1 }} - {{ day.date }}
+        </option>
+      </select>
       <label>Check-in Time</label>
-        <input v-model="eventLodging.startTime" type="text"/>
+      <input
+        v-model="eventLodging.startTime"
+        type="text"
+      >
       <label>Check-out Time</label>
-        <input v-model="eventLodging.endTime" type="text"/>s
+      <input
+        v-model="eventLodging.endTime"
+        type="text"
+      >s
       <label>Accommodation Name</label>
-        <input v-model="eventLodging.name" placeholder="Airbnb" type="text">
+      <input
+        v-model="eventLodging.name"
+        placeholder="Airbnb"
+        type="text"
+      >
       <label>Address</label>
-        <input v-model="eventLodging.location" placeholder="123 Main St, Chicago, IL 60613" type="text"/>
+      <input
+        v-model="eventLodging.location"
+        placeholder="123 Main St, Chicago, IL 60613"
+        type="text"
+      >
       <label>Total Price</label>
-        <input v-model="eventLodging.price" placeholder="$$" type="text"/>
+      <input
+        v-model="eventLodging.price"
+        placeholder="$$"
+        type="text"
+      >
       <label>Notes</label>
-        <input v-model="eventLodging.description" placeholder="Fun tings" type="text"/>
-        <button type="submit">Add to Itinerary</button>
+      <input
+        v-model="eventLodging.description"
+        placeholder="Fun tings"
+        type="text"
+      >
+      <button type="submit">
+        Add to Itinerary
+      </button>
     </form>
   </div>
 </template>

@@ -1,8 +1,10 @@
 <template>
   <div class="scrim z-999 fixed top-0 right-0 bottom-0 left-0 block overflow-hidden">
-    <div @click="closeModal">&times;</div>
+    <div @click="closeModal">
+      &times;
+    </div>
     <div class="flex-auto measure-wide center card-brand-ns bg-white mv5-ns modal">
-      <component v-bind:is="currentView"></component>
+      <Component :is="currentView" />
     </div>
   </div>
 </template>

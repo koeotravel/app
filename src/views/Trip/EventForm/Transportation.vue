@@ -2,38 +2,101 @@
   <div>
     <form @submit.prevent="handleCreateEvent(tripId, eventTransport.arrival.startDate, eventTransport)">
       <label>Arrival Start</label>
-        <select v-model="eventTransport.arrival.startDate" >
-          <option disabled value="">Please select one</option>
-          <option v-for="day in days.data" v-bind:key="day.id"> {{ day }}</option>
-        </select>
+      <select v-model="eventTransport.arrival.startDate">
+        <option
+          disabled
+          value=""
+        >
+          Please select one
+        </option>
+        <option
+          v-for="day in days.data"
+          :key="day.id"
+        >
+          {{ day }}
+        </option>
+      </select>
       <label>Arrival End</label>
-        <select v-model="eventTransport.arrival.endDate" >
-          <option disabled value="">Please select one</option>
-          <option v-for="(day, i) in days.data" v-bind:key="day.id"> Day {{ i + 1 }} - {{ day.date }}</option>
-        </select>
+      <select v-model="eventTransport.arrival.endDate">
+        <option
+          disabled
+          value=""
+        >
+          Please select one
+        </option>
+        <option
+          v-for="(day, i) in days.data"
+          :key="day.id"
+        >
+          Day {{ i + 1 }} - {{ day.date }}
+        </option>
+      </select>
       <label>Depart Start</label>
-      <select v-model="eventTransport.departure.startDate" >
-        <option disabled value="">Please select one</option>
-        <option v-for="(day, i) in days.data" v-bind:key="day.id"> Day {{ i + 1 }} - {{ day.date }}</option>
+      <select v-model="eventTransport.departure.startDate">
+        <option
+          disabled
+          value=""
+        >
+          Please select one
+        </option>
+        <option
+          v-for="(day, i) in days.data"
+          :key="day.id"
+        >
+          Day {{ i + 1 }} - {{ day.date }}
+        </option>
       </select>
       <label>Depart End</label>
-      <select v-model="eventTransport.departure.endDate" >
-        <option disabled value="">Please select one</option>
-        <option v-for="(day, i) in days.data" v-bind:key="day.id"> Day {{ i + 1 }} - {{ day.date }}</option>
+      <select v-model="eventTransport.departure.endDate">
+        <option
+          disabled
+          value=""
+        >
+          Please select one
+        </option>
+        <option
+          v-for="(day, i) in days.data"
+          :key="day.id"
+        >
+          Day {{ i + 1 }} - {{ day.date }}
+        </option>
       </select>
       <label>Accommodation Name</label>
-        <input v-model="eventTransport.name" placeholder="Southwest" type="text">
+      <input
+        v-model="eventTransport.name"
+        placeholder="Southwest"
+        type="text"
+      >
       <label>Total Price</label>
-        <input v-model="eventTransport.price" placeholder="$$" type="text"/>
+      <input
+        v-model="eventTransport.price"
+        placeholder="$$"
+        type="text"
+      >
       <label>Notes</label>
-        <input v-model="eventTransport.description" placeholder="Flying flying flying yeaaaa" type="text"/>
+      <input
+        v-model="eventTransport.description"
+        placeholder="Flying flying flying yeaaaa"
+        type="text"
+      >
       <label>Transportation type</label>
-        <input v-model="eventTransport.travelType" placeholder="Flight">
+      <input
+        v-model="eventTransport.travelType"
+        placeholder="Flight"
+      >
       <label>Departing Airport</label>
-        <input v-model="eventTransport.departure.location" placeholder="DTW"/>
+      <input
+        v-model="eventTransport.departure.location"
+        placeholder="DTW"
+      >
       <label>Arriving Airport</label>
-        <input v-model="eventTransport.arrival.location" placeholder="AZR"/>
-      <button type="submit">Add to Itinerary</button>
+      <input
+        v-model="eventTransport.arrival.location"
+        placeholder="AZR"
+      >
+      <button type="submit">
+        Add to Itinerary
+      </button>
     </form>
   </div>
 </template>

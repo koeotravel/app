@@ -2,8 +2,9 @@
   <button
     class="btn"
     :disabled="disabled"
-    @click="onClick">
-    <slot></slot>
+    @click="onClick"
+  >
+    <slot />
   </button>
 </template>
 

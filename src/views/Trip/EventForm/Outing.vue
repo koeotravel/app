@@ -1,21 +1,52 @@
 <template>
   <div>
-    <form @submit.prevent="handleCreateEvent(tripId, eventOuting.startDate, eventOuting)" >
-      <select v-model="eventOuting.startDate" >
-        <option disabled value="">Please select one</option>
-        <option v-for="day in days.data" v-bind:key="day.id"> {{day}} </option>
+    <form @submit.prevent="handleCreateEvent(tripId, eventOuting.startDate, eventOuting)">
+      <select v-model="eventOuting.startDate">
+        <option
+          disabled
+          value=""
+        >
+          Please select one
+        </option>
+        <option
+          v-for="day in days.data"
+          :key="day.id"
+        >
+          {{ day }}
+        </option>
       </select>
       <label>Event</label>
-        <input v-model="eventOuting.name" placeholder="Club" type="text">
+      <input
+        v-model="eventOuting.name"
+        placeholder="Club"
+        type="text"
+      >
       <label>Address</label>
-        <input v-model="eventOuting.location" placeholder="123 Main Street" type="text"/>
+      <input
+        v-model="eventOuting.location"
+        placeholder="123 Main Street"
+        type="text"
+      >
       <label>Total Price</label>
-        <input v-model="eventOuting.price" placeholder="$$" type="text"/>
+      <input
+        v-model="eventOuting.price"
+        placeholder="$$"
+        type="text"
+      >
       <label>Event Start Time</label>
-        <input v-model="eventOuting.startTime" type="text"/>
+      <input
+        v-model="eventOuting.startTime"
+        type="text"
+      >
       <label>Notes</label>
-        <input v-model="eventOuting.description" placeholder="Fun tings" type="text"/>
-      <button type="submit">Add to Itinerary</button>
+      <input
+        v-model="eventOuting.description"
+        placeholder="Fun tings"
+        type="text"
+      >
+      <button type="submit">
+        Add to Itinerary
+      </button>
     </form>
   </div>
 </template>

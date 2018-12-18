@@ -1,25 +1,36 @@
 <template>
   <main>
     <form @submit.prevent="uploadAvatar(file, user.uid)">
-      <progress :value="progress" max="100">0%</progress>
-      <input type="file" accept="image/*" @change="holdFile($event)">
-      <button type="submit">Upload</button>
+      <progress
+        :value="progress"
+        max="100"
+      >
+        0%
+      </progress>
+      <input
+        type="file"
+        accept="image/*"
+        @change="holdFile($event)"
+      >
+      <button type="submit">
+        Upload
+      </button>
     </form>
 
     <img :src="user.photoURL">
 
     <form @submit.prevent="handleUpdateUser">
-      <v-fieldset>
+      <VFieldset>
         <div>
-          <v-label>Name</v-label>
-          <v-input-text v-model.trim="name"></v-input-text>
+          <VLabel>Name</VLabel>
+          <VInputText v-model.trim="name" />
         </div>
 
         <div>
-          <v-label>Email</v-label>
-          <v-input-email model="user.email"></v-input-email>
+          <VLabel>Email</VLabel>
+          <VInputEmail model="user.email" />
         </div>
-      </v-fieldset>
+      </VFieldset>
 
       <button type="submit">
         Save Changes
@@ -27,9 +38,9 @@
     </form>
 
     <div>
-      <router-link :to="{name: 'password reset'}">
+      <RouterLink :to="{name: 'password reset'}">
         Reset Password
-      </router-link>
+      </RouterLink>
     </div>
 
     <div>

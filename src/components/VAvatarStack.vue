@@ -4,7 +4,7 @@
       v-for="user in users"
       :key="user.photoUrl"
     >
-      <v-avatar :src="user.photoUrl"></v-avatar>
+      <VAvatar :src="user.photoUrl" />
     </li>
   </ul>
 </template>
@@ -13,14 +13,14 @@
 import VAvatar from './VAvatar';
 
 export default {
+
+  components: {
+    VAvatar,
+  },
   props: {
     users: {
       type: Array,
     },
-  },
-
-  components: {
-    VAvatar,
   },
 };
 </script>

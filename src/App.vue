@@ -1,8 +1,8 @@
 <template>
   <div class="site">
-    <v-app-bar></v-app-bar>
+    <VAppBar />
     <main class="site-content">
-      <router-view></router-view>
+      <RouterView />
     </main>
   </div>
 </template>

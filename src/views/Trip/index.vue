@@ -1,22 +1,31 @@
 <template>
   <div>
     <main class="mw8 w-100 center tc pt4 ph3-l ph2">
-      <v-header />
+      <VHeader />
       <!-- ADD TO ITINERARY -->
       <section class="mt5 pv2 ph4-l ph3-m w-100">
         <!-- START EVENT FOURSQUARE SEARCH -->
-        <mainEventForm></mainEventForm>
-        <div class="flex flex-column bb b--shadow-brand mb3" v-show="newPlan.type === 'event'">
+        <MainEventForm />
+        <div
+          v-show="newPlan.type === 'event'"
+          class="flex flex-column bb b--shadow-brand mb3"
+        >
           <!--<fourSquare></fourSquare>-->
         </div>
         <!-- END EVENT FOURSQUARE SEARCH -->
       </section>
-      <trip-itinerary :days="days.data" :tripId="$route.params.id"/>
+      <TripItinerary
+        :days="days.data"
+        :trip-id="$route.params.id"
+      />
     </main>
-    <div v-if="showChat" class="scrim z-999 fixed top-0 right-0 bottom-0 left-0 block overflow-scroll">
-      <v-chat></v-chat>
+    <div
+      v-if="showChat"
+      class="scrim z-999 fixed top-0 right-0 bottom-0 left-0 block overflow-scroll"
+    >
+      <VChat />
     </div>
-    <v-modal-plan></v-modal-plan>
+    <VModalPlan />
   </div>
 </template>
 
@@ -50,6 +59,20 @@ export default {
     VButton,
     'v-input': Input,
     MainEventForm,
+  },
+  filters: {
+    humanTripDate(date) {
+      return moment(date).format('MMMM Do YYYY');
+    },
+    humanTime(time) {
+      if (moment(time, 'HH:mm').format('h:mm A') !== 'Invalid date') {
+        return moment(time, 'HH:mm').format('h:mm A');
+      }
+      return '-';
+    },
+    humanUnixTime(time) {
+      return moment(moment.unix(time)).utc().format('h:mm A');
+    },
   },
   data() {
     return {
@@ -99,20 +122,6 @@ export default {
     this.$store.dispatch('fetchTrip', tripId);
     this.$store.dispatch('fetchDays', tripId);
   },
-  filters: {
-    humanTripDate(date) {
-      return moment(date).format('MMMM Do YYYY');
-    },
-    humanTime(time) {
-      if (moment(time, 'HH:mm').format('h:mm A') !== 'Invalid date') {
-        return moment(time, 'HH:mm').format('h:mm A');
-      }
-      return '-';
-    },
-    humanUnixTime(time) {
-      return moment(moment.unix(time)).utc().format('h:mm A');
-    },
-  },
   computed: {
     minTime() {
       if (this.date === this.end_date) {
@@ -151,15 +160,6 @@ export default {
       },
     },
   },
-  methods: {
-    handleSendInvitation() {
-      this.$store.dispatch('sendInvitation', {
-        trip: this.$route.params.id,
-        members: this.$store.state.trip.currentTrip.party,
-        email: this.invitee,
-      });
-    },
-  },
 
   mounted() {
     this.$parent.$on('foo', (x) => {
@@ -175,6 +175,15 @@ export default {
     this.$store.commit('clearAddPlan');
     this.$store.state.trip.venues = {};
     this.$store.state.trip.currentTrip = {};
+  },
+  methods: {
+    handleSendInvitation() {
+      this.$store.dispatch('sendInvitation', {
+        trip: this.$route.params.id,
+        members: this.$store.state.trip.currentTrip.party,
+        email: this.invitee,
+      });
+    },
   },
 };
 </script>

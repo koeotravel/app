@@ -1,10 +1,10 @@
 <template>
-  <v-plan
-    leftTitleTop = "Time:"
-    :leftSubtitleTop = "details.start | humanTime"
-    leftTitleBottom = "Price:"
-    :leftsubtitleBottom = "details.price"
-    :details = "details"
+  <VPlan
+    left-title-top="Time:"
+    :left-subtitle-top="details.start | humanTime"
+    left-title-bottom="Price:"
+    :leftsubtitle-bottom="details.price"
+    :details="details"
   />
 </template>
 

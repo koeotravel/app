@@ -1,5 +1,5 @@
 <template>
   <fieldset>
-    <slot></slot>
+    <slot />
   </fieldset>
 </template>

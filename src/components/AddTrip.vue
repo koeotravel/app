@@ -1,58 +1,109 @@
 <template>
-  <div class="
+  <div
+    class="
     scrim
     z-999 fixed top-0 right-0 bottom-0 left-0
     /* needed for old browsers */
     block
     /* removes scroll when modal is opened */
-    overflow-hidden">
-    <div class="" @click.stop>
-
+    overflow-hidden"
+  >
+    <div
+      class=""
+      @click.stop
+    >
       <header class="r">
-        <h3 class="">Add Trip</h3>
-        <x-icon class="dib link dim no-underline pointer black-40" @click="closeModal"></x-icon>
+        <h3 class="">
+          Add Trip
+        </h3>
+        <XIcon
+          class="dib link dim no-underline pointer black-40"
+          @click="closeModal"
+        />
       </header>
 
       <form @submit.prevent="handleAddTrip">
-        <v-fieldset class="">
-            <div class="">
-              <div :style="{'background':'url('+newTrip.img+') center'}" class="h4 pa2 cover flex items-end justify-start">
-                <v-button type="button" btnType="secondary" :onClick="shuffleUnsplash" customClass="o-80">
-                  <shuffle-icon></shuffle-icon>
-                </v-button>
-                <span class="flex-auto"></span>
-                <div class="">
-                  <h6 class="f7 ma0 normal dib-ns">Trip Cover Image:</h6>
-                  <span class="dib-ns">
-                    <h6 class="f7 ma0 normal">Powered by
-                      <a href="https://unsplash.com/?utm_source=koeo&utm_medium=referral&utm_campaign=api-credit" target="_blank" class="link dim brand">Unsplash</a> |
-                      <a :href="newTrip.img_author_url" target="_blank" class="link dim brand pointer"> {{ newTrip.img_author }} </a>
-                    </h6>
-                  </span>
-                </div>
+        <VFieldset class="">
+          <div class="">
+            <div
+              :style="{'background':'url('+newTrip.img+') center'}"
+              class="h4 pa2 cover flex items-end justify-start"
+            >
+              <VButton
+                type="button"
+                btn-type="secondary"
+                :on-click="shuffleUnsplash"
+                custom-class="o-80"
+              >
+                <ShuffleIcon />
+              </VButton>
+              <span class="flex-auto" />
+              <div class="">
+                <h6 class="f7 ma0 normal dib-ns">
+                  Trip Cover Image:
+                </h6>
+                <span class="dib-ns">
+                  <h6 class="f7 ma0 normal">
+                    Powered by
+                    <a
+                      href="https://unsplash.com/?utm_source=koeo&utm_medium=referral&utm_campaign=api-credit"
+                      target="_blank"
+                      class="link dim brand"
+                    >
+                      Unsplash
+                    </a> |
+                    <a
+                      :href="newTrip.img_author_url"
+                      target="_blank"
+                      class="link dim brand pointer"
+                    >
+                      {{ newTrip.img_author }}
+                    </a>
+                  </h6>
+                </span>
               </div>
             </div>
-            <v-input modal v-model="newTrip.name" placeholder="🗺  Add the trip name here...">Trip Name</v-input>
-            <div class='flex flex-auto w-100 pb3 flex-row-ns flex-column'>
-              <label class="f6 f5-ns pa3-ns pb1 br3 br--left-ns w-20-ns w-100 bl-ns bt-ns bb-ns b--light-gray tl">
-                Trip Dates
-              </label>
-              <span class="pa3 br3 ba flex-auto flex flex-row b--light-gray br--right-ns">
-                <v-date-picker v-model="startDate"></v-date-picker>
-                <v-date-picker v-model="endDate"></v-date-picker>
-              </span>
-            </div>
-            <textarea class="br3 pa3 input-reset ba bg-transparent w-100 b--light-gray" cols="30" rows="4" id="description" name="description" type="description" v-model.trim="newTrip.description" placeholder="📝 Add some notes about this trip here..."></textarea>
-        </v-fieldset>
+          </div>
+          <VInput
+            v-model="newTrip.name"
+            modal
+            placeholder="🗺  Add the trip name here..."
+          >
+            Trip Name
+          </VInput>
+          <div class="flex flex-auto w-100 pb3 flex-row-ns flex-column">
+            <label class="f6 f5-ns pa3-ns pb1 br3 br--left-ns w-20-ns w-100 bl-ns bt-ns bb-ns b--light-gray tl">
+              Trip Dates
+            </label>
+            <span class="pa3 br3 ba flex-auto flex flex-row b--light-gray br--right-ns">
+              <VDatePicker v-model="startDate" />
+              <VDatePicker v-model="endDate" />
+            </span>
+          </div>
+          <textarea
+            id="description"
+            v-model.trim="newTrip.description"
+            class="br3 pa3 input-reset ba bg-transparent w-100 b--light-gray"
+            cols="30"
+            rows="4"
+            name="description"
+            type="description"
+            placeholder="📝 Add some notes about this trip here..."
+          />
+        </VFieldset>
 
-        <footer class='pa3 bt b--shadow-brand flex items-center justify-end'>
-          <a class='bold f6 underline link dim black-40 mr3 pointer' @click="closeModal">
+        <footer class="pa3 bt b--shadow-brand flex items-center justify-end">
+          <a
+            class="bold f6 underline link dim black-40 mr3 pointer"
+            @click="closeModal"
+          >
             Cancel
           </a>
-          <v-button type="submit">Add Trip This Button</v-button>
+          <VButton type="submit">
+            Add Trip This Button
+          </VButton>
         </footer>
       </form>
-
     </div>
   </div>
 </template>

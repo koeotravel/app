@@ -1,25 +1,38 @@
 <template>
   <div class="ph3 mv3">
-    <h1 class="serif normal f1 ma0 mb4">Create an account</h1>
+    <h1 class="serif normal f1 ma0 mb4">
+      Create an account
+    </h1>
 
-    <form class="measure-narrow" @submit.prevent="handleSignup(email, password)">
-      <v-fieldset>
+    <form
+      class="measure-narrow"
+      @submit.prevent="handleSignup(email, password)"
+    >
+      <VFieldset>
         <div class="form-group">
-          <v-input-email v-model="email" />
+          <VInputEmail v-model="email" />
         </div>
 
         <div class="form-group">
-          <v-input-password v-model="password" />
+          <VInputPassword v-model="password" />
         </div>
-      </v-fieldset>
+      </VFieldset>
 
-      <button type="submit" class="btn mr3">Sign up</button>
+      <button
+        type="submit"
+        class="btn mr3"
+      >
+        Sign up
+      </button>
 
       <p class="f6 ma0 mt3">
         Have an account?
-        <router-link :to="{name: 'login'}" class="link">
+        <RouterLink
+          :to="{name: 'login'}"
+          class="link"
+        >
           Log in &rarr;
-        </router-link>
+        </RouterLink>
       </p>
     </form>
   </div>
