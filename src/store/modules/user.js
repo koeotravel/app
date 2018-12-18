@@ -55,12 +55,7 @@ const actions = {
         })
         .catch((error) => { throw Error(error) })
     }
-  },
-
-  passwordReset: (email) => {
-    auth.sendPasswordResetEmail(email)
-      .catch((error) => { throw Error(error) })
-  },
+  }
 }
 
 const mutations = {

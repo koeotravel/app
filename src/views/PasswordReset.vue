@@ -1,22 +1,23 @@
 <template>
-  <div>
-    <form @submit.prevent="handlePasswordReset(email)" class="mw16 gutters">
-      <h1>Find your account</h1>
+  <div class="ph3 mv3">
+    <h1 class="serif normal f1 ma0 mb2">Reset password</h1>
+
+    <form class="measure-narrow" @submit.prevent="handlePasswordReset(email)">
+      <p class="ma0 pb4 serif">Enter your email address and we'll send you a link to reset your password.</p>
+
       <v-fieldset>
         <div class="form-group">
           <v-input-email v-model="email" />
-          <p class="fs3">
-            We’ll send you a link to change your password.
-          </p>
         </div>
       </v-fieldset>
 
-      <button type="submit" class="btn mr4">Request password reset</button>
+      <button type="submit" class="btn">Send reset link</button>
     </form>
   </div>
 </template>
 
 <script>
+import { auth } from '@/main'
 import VFieldset from '@/components/VFieldset'
 import VInputEmail from '@/components/VInputEmail'
 
@@ -33,8 +34,9 @@ export default {
   },
 
   methods: {
-    handlePasswordReset(email) {
-      this.$store.dispatch('passwordReset', email)
+    handlePasswordReset() {
+      auth.sendPasswordResetEmail(this.email)
+        .catch((error) => { throw Error(error) })
     },
   },
 }
