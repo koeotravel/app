@@ -20,7 +20,7 @@
     <img :src="user.photoURL">
 
     <form @submit.prevent="handleUpdateUser">
-      <VFieldset>
+      <BaseFieldset>
         <div>
           <VLabel>Name</VLabel>
           <VInputText v-model.trim="name" />
@@ -28,9 +28,9 @@
 
         <div>
           <VLabel>Email</VLabel>
-          <VInputEmail model="user.email" />
+          <BaseInputEmail model="user.email" />
         </div>
-      </VFieldset>
+      </BaseFieldset>
 
       <button type="submit">
         Save Changes
@@ -54,21 +54,8 @@
 <script>
 import { mapState } from 'vuex';
 import { storage } from '@/main';
-import {
-  VFieldset,
-  VInputEmail,
-  VInputText,
-  VLabel,
-} from '@/components';
 
 export default {
-  components: {
-    VFieldset,
-    VInputEmail,
-    VInputText,
-    VLabel,
-  },
-
   data() {
     return {
       email: '',

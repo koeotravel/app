@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Profile from './views/Profile';
-import Dashboard from './views/Dashboard';
-import PasswordReset from './views/PasswordReset';
-import Login from './views/Login';
-import Signup from './views/Signup';
-import Trip from './views/Trip/index';
-import NotFound from './views/NotFound';
+
+// Pages
+import Profile from './pages/Profile';
+import Feed from './pages/Feed';
+import PasswordReset from './pages/PasswordReset';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Trip from './pages/Trip';
+import NotFound from './pages/NotFound';
 import { auth } from './main';
 
 Vue.use(Router);
@@ -15,8 +17,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
-      component: Dashboard,
+      name: 'feed',
+      component: Feed,
       meta: { requiresAuth: true },
     },
     {

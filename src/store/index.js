@@ -1,46 +1,25 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VuexPersist from 'vuex-persist';
-import {
-  chat, dashboard, invitations, foursquare, user, trip, days, events,
-} from './modules';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import VuexPersist from 'vuex-persist'
+import user from './modules/user';
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const vuexLocalStorage = new VuexPersist({
   key: 'vuex',
   storage: window.localStorage,
-});
+})
 
 export default new Vuex.Store({
-  state: {
-    showModal: false,
-    showModalView: undefined,
-  },
+  state: {},
 
-  mutations: {
-    openModal: (state, modalView) => {
-      state.showModal = true;
-      state.showModalView = modalView;
-    },
-    closeModal: (state) => {
-      state.showModal = false;
-      state.showModalView = null;
-    },
-  },
+  mutations: {},
 
   modules: {
-    chat,
-    dashboard,
-    foursquare,
-    invitations,
     user,
-    trip,
-    days,
-    events,
   },
 
   plugins: [
     vuexLocalStorage.plugin,
   ],
-});
+})

@@ -12,11 +12,11 @@
         Enter your email address and we'll send you a link to reset your password.
       </p>
 
-      <VFieldset>
+      <BaseFieldset>
         <div class="form-group">
-          <VInputEmail v-model="email" />
+          <BaseInputEmail v-model="email" />
         </div>
-      </VFieldset>
+      </BaseFieldset>
 
       <button
         type="submit"
@@ -30,15 +30,8 @@
 
 <script>
 import { auth } from '@/main';
-import VFieldset from '@/components/VFieldset';
-import VInputEmail from '@/components/VInputEmail';
 
 export default {
-  components: {
-    VFieldset,
-    VInputEmail,
-  },
-
   data() {
     return {
       email: '',

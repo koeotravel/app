@@ -96,27 +96,13 @@
         </ul>
       </nav>
     </div>
-
-    <!-- Create trip modal -->
-    <!-- <addtrip v-show="this.showTripModal"></addtrip> -->
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
-import {
-  VAvatar,
-  VButton,
-  VHr,
-} from '.';
 
 export default {
-  components: {
-    VButton,
-    VAvatar,
-    VHr,
-  },
-
   data() {
     return {
       url: '',

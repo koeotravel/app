@@ -1,14 +1,15 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-import 'firebase/storage';
-import moment from 'moment';
-import Raven from 'raven-js';
-import RavenVue from 'raven-js/plugins/vue';
-import Vue from 'vue';
-import App from './App';
-import router from './router';
-import store from './store';
+import upperFirst from 'lodash/upperFirst'
+import camelCase from 'lodash/camelCase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+import 'firebase/storage'
+import Raven from 'raven-js'
+import RavenVue from 'raven-js/plugins/vue'
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
@@ -16,46 +17,61 @@ const config = {
   projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
-};
+}
 
-firebase.initializeApp(config);
+firebase.initializeApp(config)
 
-export const db = firebase.firestore();
+export const db = firebase.firestore()
 
 // Disable deprecated features
 db.settings({
   timestampsInSnapshots: true,
-});
-export const auth = firebase.auth();
-export const storage = firebase.storage();
+})
+export const auth = firebase.auth()
+export const storage = firebase.storage()
 
 // Turn on Error Tracking for production environments only!
 if (process.env.NODE_ENV === 'production') {
   Raven
     .config(process.env.VUE_APP_SENTRY)
     .addPlugin(RavenVue, Vue)
-    .install();
+    .install()
 }
 
-// eslint-disable-next-line
+const requireComponent = require.context(
+  // The relative path of the components folder
+  './components',
+  // Whether or not to look in subfolders
+  false,
+  // The regular expression used to match base component filenames
+  /Base[A-Z]\w+\.(vue|js)$/,
+)
+
+requireComponent.keys().forEach((fileName) => {
+  // Get component config
+  const componentConfig = requireComponent(fileName)
+
+  // Get PascalCase name of component
+  const componentName = upperFirst(
+    camelCase(
+      // Strip the leading `./` and extension from the filename
+      fileName.replace(/^\.\/(.*)\.\w+$/, '$1'),
+    ),
+  )
+
+  // Register component globally
+  Vue.component(
+    componentName,
+    // Look for the component options on `.default`, which will
+    // exist if the component was exported with `export default`,
+    // otherwise fall back to module's root.
+    componentConfig.default || componentConfig,
+  )
+})
+
 new Vue({
   router,
   store,
   el: '#app',
   render: h => h(App),
-});
-
-Vue.filter('humanDate', (date, format = 'L') => (moment(date).isValid()
-  ? moment(date).format(format)
-  : null
-));
-
-Vue.filter('humanTime', (time, format = 'h:mm A') => (moment(time).isValid()
-  ? moment(time, 'HH:mm').format(format)
-  : '-'
-));
-
-Vue.filter('humanUnixTime', (time, format = 'h:mm A') => (moment(time).isValid()
-  ? moment(moment.unix(time)).utc().format(format)
-  : null
-));
+})

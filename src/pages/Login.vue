@@ -8,15 +8,15 @@
       class="measure-narrow"
       @submit.prevent="handleLogin(email, password)"
     >
-      <VFieldset>
+      <BaseFieldset>
         <div class="form-group">
-          <VInputEmail v-model="email" />
+          <BaseInputEmail v-model="email" />
         </div>
 
         <div class="form-group">
-          <VInputPassword v-model="password" />
+          <BaseInputPassword v-model="password" />
         </div>
-      </VFieldset>
+      </BaseFieldset>
 
       <button
         type="submit"
@@ -48,21 +48,7 @@
 </template>
 
 <script>
-import {
-  VFieldset,
-  VHr,
-  VInputEmail,
-  VInputPassword,
-} from '@/components';
-
 export default {
-  components: {
-    VFieldset,
-    VHr,
-    VInputEmail,
-    VInputPassword,
-  },
-
   data() {
     return {
       email: undefined,

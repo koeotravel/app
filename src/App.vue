@@ -1,20 +1,23 @@
 <template>
   <div class="site">
-    <VAppBar />
+    <AppHeader />
     <main class="site-content">
       <RouterView />
     </main>
+    <AppFooter />
   </div>
 </template>
 
 <script>
-import VAppBar from './components/VAppBar';
+import AppHeader from '@/components/AppHeader'
+import AppFooter from '@/components/AppFooter'
 
 export default {
   components: {
-    VAppBar,
-  },
-};
+    AppHeader,
+    AppFooter,
+  }
+}
 </script>
 
 <style src="./assets/styles/main.scss" lang="scss"></style>
