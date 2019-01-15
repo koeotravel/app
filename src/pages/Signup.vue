@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group">
-          <VInputPassword v-model="password" />
+          <BaseInputPassword v-model="password" />
         </div>
       </BaseFieldset>
 

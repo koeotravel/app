@@ -2,7 +2,7 @@
   <div class="ph3 mv3 flex appbar">
     <div class="flex-auto">
       <RouterLink
-        :to="{name: 'dashboard'}"
+        :to="{name: 'feed'}"
         class="w2 dib"
       >
         <svg
@@ -13,8 +13,6 @@
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
         >
-          <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
-          <desc>Created with Sketch.</desc>
           <defs />
           <g
             id="logo-v3"
@@ -76,7 +74,7 @@
       v-if="userIsLoggedIn"
       class="flex-auto tr"
     >
-      <VAvatar src="http://placekitten.com/100" />
+      <BaseAvatar src="http://placekitten.com/100" />
       <nav>
         <ul>
           <li>

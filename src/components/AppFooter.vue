@@ -1,9 +1,3 @@
 <template>
-  <div>footer</div>
+  <div>Footer</div>
 </template>
-
-<script>
-export default {
-  name: 'AppFooter'
-}
-</script>

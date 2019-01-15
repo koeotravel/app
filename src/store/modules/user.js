@@ -19,7 +19,7 @@ const actions = {
     try {
       const response = await auth.createUserWithEmailAndPassword(email, password);
       commit(types.USER, response.user);
-      router.push({ name: 'dashboard' });
+      router.push({ name: 'feed' });
     } catch (error) {
       throw Error(error);
     }
@@ -30,7 +30,7 @@ const actions = {
     try {
       const response = await auth.signInWithEmailAndPassword(email, password);
       commit(types.USER, response.user);
-      router.push({ name: 'dashboard' });
+      router.push({ name: 'feed' });
     } catch (error) {
       throw Error(error);
     }
@@ -40,7 +40,7 @@ const actions = {
     auth.signOut()
       .then(() => {
         commit(types.USER, initialState.data);
-        router.push({ name: 'dashboard' });
+        router.push({ name: 'login' });
       });
   },
 
@@ -51,7 +51,7 @@ const actions = {
       user.delete()
         .then(() => {
           commit(types.USER, initialState.data);
-          router.push({ name: 'dashboard' });
+          router.push({ name: 'login' });
         })
         .catch((error) => { throw Error(error); });
     }

@@ -22,12 +22,12 @@
     <form @submit.prevent="handleUpdateUser">
       <BaseFieldset>
         <div>
-          <VLabel>Name</VLabel>
-          <VInputText v-model.trim="name" />
+          <BaseLabel>Name</BaseLabel>
+          <BaseInputText v-model.trim="name" />
         </div>
 
         <div>
-          <VLabel>Email</VLabel>
+          <BaseLabel>Email</BaseLabel>
           <BaseInputEmail model="user.email" />
         </div>
       </BaseFieldset>

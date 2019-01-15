@@ -1,15 +1,11 @@
 <template>
   <main>
-    <ul
-      v-for="(trip, index) in trips"
-      :key="trip.id"
-    >
+    <ul>
       <li>
         <div>
           <h3 v-if="trip.name">
             {{ trip.name }}
           </h3>
-          <VAvatarStack :users="trip.party" />
         </div>
 
         <div>
