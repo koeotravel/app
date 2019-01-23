@@ -13,9 +13,9 @@
           <BaseInputEmail v-model="email" />
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <BaseInputPassword v-model="password" />
-        </div>
+        </div> -->
       </BaseFieldset>
 
       <button
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { auth } from '@/main'
+
 export default {
   data() {
     return {
@@ -48,10 +50,17 @@ export default {
   },
 
   methods: {
-    handleSignup(email, password) {
-      this.$store.dispatch('signup', { email, password });
-      this.email = '';
-      this.password = '';
+    handleSignup(email) {
+      const actionCodeSettings = {
+        // URL you want to redirect back to. The domain (www.example.com) for this
+        // URL must be whitelisted in the Firebase Console.
+        url: 'http://localhost:8080/confirm',
+        // This must be true.
+        handleCodeInApp: true,
+      };
+
+      auth.sendSignInLinkToEmail(email, actionCodeSettings)
+      window.localStorage.setItem('emailForSignIn', email)
     },
   },
 };

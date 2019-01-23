@@ -14,16 +14,27 @@ const getters = {
 };
 
 const actions = {
-  signup: async ({ commit }, { email, password }) => {
-    if (!email || !password) { return; }
-    try {
-      const response = await auth.createUserWithEmailAndPassword(email, password);
-      commit(types.USER, response.user);
-      router.push({ name: 'feed' });
-    } catch (error) {
-      throw Error(error);
-    }
-  },
+  // signup: async ({ commit }, { email, password }) => {
+  //   if (!email) { return; }
+  //   try {
+  //     // const response = await auth.createUserWithEmailAndPassword(email, password);
+  //     // commit(types.USER, response.user);
+  //     // router.push({ name: 'feed' });
+
+  //     const actionCodeSettings = {
+  //       // URL you want to redirect back to. The domain (www.example.com) for this
+  //       // URL must be whitelisted in the Firebase Console.
+  //       url: 'http://localhost:8080/confirm',
+  //       // This must be true.
+  //       handleCodeInApp: true,
+  //     };
+
+  //     auth.sendSignInLinkToEmail(email, actionCodeSettings)
+  //     window.localStorage.setItem('emailForSignIn', email)
+  //   } catch (error) {
+  //     throw Error(error);
+  //   }
+  // },
 
   login: async ({ commit }, { email, password }) => {
     if (!email || !password) { return; }
@@ -56,6 +67,11 @@ const actions = {
         .catch((error) => { throw Error(error); });
     }
   },
+
+  setUser: ({ commit }, payload) => {
+    commit(types.USER, payload)
+    router.push({ name: 'feed' });
+  }
 };
 
 const mutations = {

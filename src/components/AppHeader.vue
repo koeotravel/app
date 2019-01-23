@@ -74,7 +74,7 @@
       v-if="userIsLoggedIn"
       class="flex-auto tr"
     >
-      <BaseAvatar src="http://placekitten.com/100" />
+      <BaseAvatar :src="`https://api.adorable.io/avatars/200/{{user.data.email}}.png`" />
       <nav>
         <ul>
           <li>
