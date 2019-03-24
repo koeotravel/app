@@ -1,5 +1,4 @@
-import upperFirst from 'lodash/upperFirst'
-import camelCase from 'lodash/camelCase'
+import { camelCase, upperFirst } from 'lodash'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -22,11 +21,6 @@ const config = {
 firebase.initializeApp(config)
 
 export const db = firebase.firestore()
-
-// Disable deprecated features
-db.settings({
-  timestampsInSnapshots: true,
-})
 export const auth = firebase.auth()
 export const storage = firebase.storage()
 
