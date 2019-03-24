@@ -25,5 +25,5 @@
       "dest": "/index.html"
     }
   ],
-  "alias" : ["staging.koeo.co"]
+  "alias" : ["app-staging.koeo.co"]
 }
