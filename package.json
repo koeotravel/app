@@ -6,7 +6,7 @@
     "dev": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "now-build": "npm run build"
+    "now-build": "vue-cli-service build"
   },
   "dependencies": {
     "axios": "^0.18.0",
