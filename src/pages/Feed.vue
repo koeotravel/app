@@ -1,23 +1,5 @@
 <template>
   <main>
-    <ul>
-      <li>
-        <div>
-          <h3 v-if="trip.name">
-            {{ trip.name }}
-          </h3>
-        </div>
-
-        <div>
-          <RouterLink :to="{ name: 'trip', params: { id: trip.id } }">
-            <BaseButton>Edit Trip</BaseButton>
-          </RouterLink>
-
-          <BaseButton :on-click="handleArchiveTrip(index, trip.archived)">
-            Archive
-          </BaseButton>
-        </div>
-      </li>
-    </ul>
+    <h1>Welcome to you feed</h1>
   </main>
 </template>
