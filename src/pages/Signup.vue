@@ -1,29 +1,25 @@
 <template>
   <div class="ph3 mv3">
-    <h1 class="serif normal f1 ma0 mb4">
+    <h1 class="serif normal f1 ma0 mb4 tc">
       Create an account
     </h1>
 
     <form
-      class="measure-narrow"
+      class="measure-narrow center"
       @submit.prevent="handleSignup(email, password)"
     >
       <BaseFieldset>
         <div class="form-group">
-          <BaseInputEmail v-model="email" />
+          <BaseInputEmail v-model="email" pill />
         </div>
-
-        <!-- <div class="form-group">
-          <BaseInputPassword v-model="password" />
-        </div> -->
       </BaseFieldset>
 
-      <button
+      <BaseButton
         type="submit"
-        class="btn mr3"
+        class="w-100"
       >
-        Sign up
-      </button>
+        Join
+      </BaseButton>
 
       <p class="f6 ma0 mt3">
         Have an account?

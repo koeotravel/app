@@ -1,6 +1,7 @@
 body {
   background: $white;
   color: $eggplant;
+  font-size: ms(0);
 }
 
 .site {
@@ -16,19 +17,6 @@ body {
 .mono { font-family: $mono; }
 .serif { font-family: $serif; }
 
-main {
-  flex: 1;
-}
-
 .center {
   margin: 0 auto;
 }
-
-.mw16 {
-  max-width: 16rem;
-}
-
-.gutters {
-  margin: 0 1.25rem;
-}
-

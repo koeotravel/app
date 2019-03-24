@@ -4,6 +4,7 @@
     placeholder="Password"
     :value="value"
     @input="$emit('input', $event.target.value)"
+    :class="{dirty}"
   >
 </template>
 
@@ -11,7 +12,10 @@
 export default {
   props: {
     value: {
-      type: String
+      type: String,
+    },
+    dirty: {
+      type: Boolean,
     }
   }
 };

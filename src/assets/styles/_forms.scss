@@ -12,13 +12,12 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 textarea,
-button, {
+button {
   border: none;
-  border-radius: .25rem;
   font-family: inherit;
   font-size: .875rem;
   line-height: 1;
-  padding: .75rem 1rem;
+  padding: 1rem;
 }
 
 input[type="text"],
@@ -32,6 +31,10 @@ textarea {
   &:focus {
     outline: none;
     border-color: $eggplant;
+  }
+
+  &.dirty {
+    border-color: $raspberry;
   }
 }
 

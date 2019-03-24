@@ -10,11 +10,17 @@
     >
       <BaseFieldset>
         <div class="form-group">
-          <BaseInputEmail v-model="email" />
+          <BaseInputEmail
+            v-model="email"
+            :dirty="hasErrors"
+          />
         </div>
 
         <div class="form-group">
-          <BaseInputPassword v-model="password" />
+          <BaseInputPassword
+            v-model="password"
+            :dirty="hasErrors"
+          />
         </div>
       </BaseFieldset>
 
@@ -24,9 +30,11 @@
       >
         Log in
       </button>
+
       <i class="normal">
         &middot;
       </i>
+
       <RouterLink
         :to="{name: 'password reset'}"
         class="f6 link"
@@ -43,11 +51,17 @@
           Sign up &rarr;
         </RouterLink>
       </p>
+
+      <p v-if="hasErrors" class="f6 ma0 mt3 pa3 bg-washed-red dark-red">
+        {{ user.errors }}
+      </p>
     </form>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -56,11 +70,14 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState(['user']),
+    ...mapGetters(['hasErrors']),
+  },
+
   methods: {
     handleLogin(email, password) {
       this.$store.dispatch('login', { email, password });
-      this.email = '';
-      this.password = '';
     },
   },
 };
