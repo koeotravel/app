@@ -4,10 +4,10 @@ cache:
   paths:
     - node_modules/
 
-# lint:
-#   stage: test
-#   script:
-#     - npm run lint
+lint:
+  stage: test
+  script:
+    - npm run lint
 
 deploy_staging:
   stage: deploy
@@ -18,7 +18,6 @@ deploy_staging:
     VUE_APP_FIREBASE_PROJECT_ID: $VUE_APP_FIREBASE_PROJECT_ID
     VUE_APP_FIREBASE_STORAGE_BUCKET: $VUE_APP_FIREBASE_STORAGE_BUCKET
     VUE_APP_FIREBASE_MESSAGING_SENDER_ID: $VUE_APP_FIREBASE_MESSAGING_SENDER_ID
-
   environment:
     name: staging
     url: https://app-staging.koeo.co
@@ -27,21 +26,6 @@ deploy_staging:
     - npm install -g @vue/cli
     - npm install
   script:
-    - echo $VUE_APP_FIREBASE_API_KEY
-    - echo $VUE_APP_FIREBASE_AUTH_DOMAIN
-    - echo $VUE_APP_FIREBASE_DATABASE_URL
-    - echo $VUE_APP_FIREBASE_PROJECT_ID
-    - echo $VUE_APP_FIREBASE_STORAGE_BUCKET
-    - echo $VUE_APP_FIREBASE_MESSAGING_SENDER_ID
-    - now -b VUE_APP_FIREBASE_API_KEY=$VUE_APP_FIREBASE_API_KEY -b VUE_APP_FIREBASE_AUTH_DOMAIN=$VUE_APP_FIREBASE_AUTH_DOMAIN -b VUE_APP_FIREBASE_DATABASE_URL=$VUE_APP_FIREBASE_DATABASE_URL -b VUE_APP_FIREBASE_PROJECT_ID="'koeo-staging'" -b VUE_APP_FIREBASE_STORAGE_BUCKET=$VUE_APP_FIREBASE_STORAGE_BUCKET -b VUE_APP_FIREBASE_MESSAGING_SENDER_ID=$VUE_APP_FIREBASE_MESSAGING_SENDER_ID -t omoKtBKcPdIxL3LFCM2by5xp
+    - now -b VUE_APP_FIREBASE_API_KEY=$VUE_APP_FIREBASE_API_KEY -b VUE_APP_FIREBASE_AUTH_DOMAIN=$VUE_APP_FIREBASE_AUTH_DOMAIN -b VUE_APP_FIREBASE_DATABASE_URL=$VUE_APP_FIREBASE_DATABASE_URL -b VUE_APP_FIREBASE_PROJECT_ID=$VUE_APP_FIREBASE_PROJECT_ID -b VUE_APP_FIREBASE_STORAGE_BUCKET=$VUE_APP_FIREBASE_STORAGE_BUCKET -b VUE_APP_FIREBASE_MESSAGING_SENDER_ID=$VUE_APP_FIREBASE_MESSAGING_SENDER_ID -t omoKtBKcPdIxL3LFCM2by5xp
   only:
     - develop
-
-# deploy_production:
-#   stage: deploy
-#   environment:
-#     name: production
-#     url: https://koeo.co
-#   script:
-#   only:
-#     - master
