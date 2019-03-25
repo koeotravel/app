@@ -1,10 +1,51 @@
 image: node:11.11.0
 
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - setup
+  - test
+  - build
+  - deploy
+
+setup:
+  script:
+    - echo "Setting up the app"
+    - npm install -g --unsafe-perm now
+    - npm install -g @vue/cli
+    - npm install
+
+test:
+  script:
+    - echo "Running tests"
+    - npm run lint
+
+build:
+  script:
+   - echo "Building the app"
+   - npm run build
+
 deploy_staging:
   stage: deploy
+  variables:
+    VUE_APP_FIREBASE_PROJECT_ID: "koeo-staging"
+  environment:
+    name: staging
+    url: https://app-staging.koeo.co
   script:
-    - npm i -g --unsafe-perm now
-    - npm install
+    - echo "Deploying to staging"
     - now -t omoKtBKcPdIxL3LFCM2by5xp
   only:
     - develop
+
+deploy_production:
+  stage: deploy
+  environment:
+    name: production
+    url: https://koeo.co
+  script:
+    - echo "Deploying to production"
+  only:
+    - master
