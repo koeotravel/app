@@ -40,7 +40,7 @@ const actions = {
   //   }
   // },
 
-  login: async ({ commit, state }, { email, password }) => {
+  login: async ({ commit }, { email, password }) => {
     try {
       // try to log user in with email and password
       const response = await auth.signInWithEmailAndPassword(email, password)

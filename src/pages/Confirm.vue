@@ -6,7 +6,7 @@
       Terms of Service and Privacy Policy:
     </p>
 
-    <BaseButton :onClick="confirm">I agree</BaseButton>
+    <BaseButton :onClick="confirm(email)">I agree</BaseButton>
   </div>
 </template>
 
@@ -40,7 +40,7 @@ export default {
   methods: {
     confirm(email) {
       // The client SDK will parse the code from the link for you.
-      auth.signInWithEmailLink(this.email, window.location.href)
+      auth.signInWithEmailLink(email, window.location.href)
         .then((result) => {
           // Clear email from storage.
           window.localStorage.removeItem('emailForSignIn');
