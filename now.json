@@ -27,12 +27,12 @@
   ],
   "build": {
     "env": {
-      "VUE_APP_FIREBASE_API_KEY": "@apiKey",
-      "VUE_APP_FIREBASE_AUTH_DOMAIN": "@authDomain",
-      "VUE_APP_FIREBASE_DATABASE_URL": "@databaseURL",
-      "VUE_APP_FIREBASE_PROJECT_ID": "@projectId",
-      "VUE_APP_FIREBASE_STORAGE_BUCKET": "@storageBucket",
-      "VUE_APP_FIREBASE_MESSAGING_SENDER_ID": "@messagingSenderId"
+      "VUE_APP_FIREBASE_API_KEY": "@api-key",
+      "VUE_APP_FIREBASE_AUTH_DOMAIN": "@auth-domain",
+      "VUE_APP_FIREBASE_DATABASE_URL": "@database-url",
+      "VUE_APP_FIREBASE_PROJECT_ID": "@project-id",
+      "VUE_APP_FIREBASE_STORAGE_BUCKET": "@storage-bucket",
+      "VUE_APP_FIREBASE_MESSAGING_SENDER_ID": "@messaging-sende-id"
     }
   },
   "scope": "koeo",
