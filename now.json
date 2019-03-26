@@ -32,7 +32,7 @@
       "VUE_APP_FIREBASE_DATABASE_URL": "@database-url",
       "VUE_APP_FIREBASE_PROJECT_ID": "@project-id",
       "VUE_APP_FIREBASE_STORAGE_BUCKET": "@storage-bucket",
-      "VUE_APP_FIREBASE_MESSAGING_SENDER_ID": "@messaging-sende-id"
+      "VUE_APP_FIREBASE_MESSAGING_SENDER_ID": "@messaging-sender-id"
     }
   },
   "scope": "koeo",
