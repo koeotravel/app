@@ -71,28 +71,15 @@
     </div>
 
     <div
-      v-if="userIsLoggedIn"
-      class="flex-auto tr"
+      v-if="isUserLoggedIn"
+      class="flex-auto flex justify-end items-center tr"
     >
-      <BaseAvatar :src="`https://api.adorable.io/avatars/200/{{user.data.email}}.png`" />
-      <nav>
-        <ul>
-          <li>
-            <RouterLink :to="{name: 'profile'}">
-              Profile
-            </RouterLink>
-          </li>
-          <li>
-            <button
-              type="button"
-              class="btn"
-              @click="logout"
-            >
-              Log out
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <RouterLink :to="{name: 'profile'}" class="mr3">
+        <BaseAvatar :src="`https://api.adorable.io/avatars/200/{{user.data.email}}.png`" />
+      </RouterLink>
+      <i @click="logout" class="pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </i>
     </div>
   </div>
 </template>
@@ -101,19 +88,13 @@
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
-  data() {
-    return {
-      url: '',
-    };
-  },
-
   computed: {
     ...mapState(['user']),
-    ...mapGetters(['userIsLoggedIn']),
+    ...mapGetters(['isUserLoggedIn']),
   },
 
   methods: {
-    ...mapActions(['logout', 'getAvatar']),
+    ...mapActions(['logout']),
   },
 };
 </script>

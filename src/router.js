@@ -7,7 +7,6 @@ import Feed from './pages/Feed';
 import PasswordReset from './pages/PasswordReset';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Confirm from './pages/Confirm';
 import Trip from './pages/Trip';
 import NotFound from './pages/NotFound';
 import { auth } from './main';
@@ -44,11 +43,6 @@ const router = new Router({
       path: '/signup',
       name: 'signup',
       component: Signup,
-    },
-    {
-      path: '/confirm',
-      name: 'confirm',
-      component: Confirm,
     },
     {
       path: '/password-reset',

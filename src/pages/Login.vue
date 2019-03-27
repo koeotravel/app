@@ -12,14 +12,12 @@
         <div class="form-group">
           <BaseInputEmail
             v-model="email"
-            :dirty="hasErrors"
           />
         </div>
 
         <div class="form-group">
           <BaseInputPassword
             v-model="password"
-            :dirty="hasErrors"
           />
         </div>
       </BaseFieldset>
@@ -52,15 +50,15 @@
         </RouterLink>
       </p>
 
-      <p v-if="hasErrors" class="f6 ma0 mt3 pa3 bg-washed-red dark-red">
-        {{ user.errors }}
+      <p v-if="account.errors && account.errors.length > 0" class="f6 ma0 mt3 pa3 bg-washed-red dark-red">
+        {{ account.errors }}
       </p>
     </form>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   data() {
@@ -71,8 +69,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['user']),
-    ...mapGetters(['hasErrors']),
+    ...mapState(['account']),
   },
 
   methods: {

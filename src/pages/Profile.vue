@@ -112,7 +112,7 @@ export default {
     },
 
     handleDeleteUser() {
-      this.$store.dispatch('delete', this.$store.state.user.currentUser);
+      this.$store.dispatch('delete', this.$store.state.account.currentUser);
     },
   },
 };

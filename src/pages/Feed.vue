@@ -1,5 +1,15 @@
 <template>
   <main>
-    <h1>Welcome to you feed</h1>
+    {{ account.currentUser }}
   </main>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState(['account']),
+  },
+}
+</script>
