@@ -12,6 +12,17 @@ const getters = {
 }
 
 const actions = {
+  signup: async({ commit }, { email, password }) => {
+    try {
+      const response = await auth.createUserWithEmailAndPassword(email, password)
+      commit(types.SET_USER, response.user)
+      commit(types.UNSET_ERRORS)
+      router.push({ name: 'feed' })
+    } catch(error) {
+      commit(types.SET_ERRORS, [error])
+    }
+  },
+
   login: async ({ commit }, { email, password }) => {
     try {
       const response = await auth.signInWithEmailAndPassword(email, password)
