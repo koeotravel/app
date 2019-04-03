@@ -1,6 +1,6 @@
+import * as types from '@/store/mutation-types'
 import { auth } from '@/main'
 import router from '@/router'
-import { accountTypes } from '../types'
 
 const initialState = {
   currentUser: {},
@@ -12,40 +12,51 @@ const getters = {
 }
 
 const actions = {
+  signup: async({ commit }, { email, password }) => {
+    try {
+      const response = await auth.createUserWithEmailAndPassword(email, password)
+      commit(types.SET_USER, response.user)
+      commit(types.UNSET_ERRORS)
+      router.push({ name: 'feed' })
+    } catch(error) {
+      commit(types.SET_ERRORS, [error])
+    }
+  },
+
   login: async ({ commit }, { email, password }) => {
     try {
       const response = await auth.signInWithEmailAndPassword(email, password)
-      commit(accountTypes.SET_USER, response.user)
-      commit(accountTypes.UNSET_ERRORS)
+      commit(types.SET_USER, response.user)
+      commit(types.UNSET_ERRORS)
       router.push({ name: 'feed' })
     } catch (error) {
-      commit(accountTypes.SET_ERRORS, [error])
+      commit(types.SET_ERRORS, [error])
     }
   },
 
   logout: async ({ commit }) => {
     auth.signOut()
       .then(() => {
-        commit(accountTypes.UNSET_USER)
+        commit(types.UNSET_USER)
         router.push({ name: 'login' })
       })
   },
 }
 
 const mutations = {
-  [accountTypes.SET_USER] (state, payload) {
+  [types.SET_USER] (state, payload) {
     return state.currentUser = payload
   },
 
-  [accountTypes.UNSET_USER] (state) {
+  [types.UNSET_USER] (state) {
     return state.currentUser = {}
   },
 
-  [accountTypes.SET_ERRORS] (state, payload) {
+  [types.SET_ERRORS] (state, payload) {
     return state.errors = payload
   },
 
-  [accountTypes.UNSET_ERRORS] (state) {
+  [types.UNSET_ERRORS] (state) {
     return state.errors = []
   },
 }
