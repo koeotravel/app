@@ -50,5 +50,11 @@ export default {
       password: undefined,
     };
   },
+
+  methods: {
+    handleSignup(email, password) {
+      this.$store.dispatch('signup', { email, password })
+    }
+  }
 };
 </script>

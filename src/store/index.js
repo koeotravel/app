@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
-import account from './modules/account';
+import accountModule from './modules/account';
 
 Vue.use(Vuex)
 
@@ -12,11 +12,12 @@ const vuexLocalStorage = new VuexPersist({
 
 export default new Vuex.Store({
   state: {},
-
+  getters: {},
   mutations: {},
+  actions: {},
 
   modules: {
-    account,
+    account: accountModule,
   },
 
   plugins: [
