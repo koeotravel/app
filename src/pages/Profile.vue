@@ -1,50 +1,78 @@
 <template>
-  <main>
-    <form @submit.prevent="uploadAvatar(file, user.uid)">
+  <main class="ph3 mv3 center">
+    <form @submit.prevent="uploadAvatar(file, account.currentUser.uid)" class="measure mb4 pa3 br2 ba b--black-10">
+      <legend class="b f4">Upate Profile</legend>
+
+      <img
+        class="w-100"
+        :src="account.currentUser.photoURL"
+      />
+
       <progress
+        class="w-100"
         :value="progress"
         max="100"
       >
         0%
       </progress>
+
       <input
         type="file"
         accept="image/*"
         @change="holdFile($event)"
       >
-      <button type="submit">
-        Upload
-      </button>
-    </form>
 
-    <img :src="user.photoURL">
-
-    <form @submit.prevent="handleUpdateUser">
-      <BaseFieldset>
-        <div>
-          <BaseLabel>Name</BaseLabel>
+      <div>
+        <div class="mv3">
+          <BaseLabel>Display Name</BaseLabel>
           <BaseInputText v-model.trim="name" />
         </div>
+      </div>
+      <BaseButton type="submit">
+        Upload
+      </BaseButton>
+    </form>
 
-        <div>
-          <BaseLabel>Email</BaseLabel>
-          <BaseInputEmail model="user.email" />
+    <form @submit.prevent="handleUpdateUser" class="measure mb4 pa3 br2 ba b--black-10">
+      <BaseFieldset>
+        <legend class="b f4">Update Email</legend>
+        <div class="mv3">
+          <BaseLabel>Email ({{ account.currentUser.emailVerified }})</BaseLabel>
+          <BaseInputEmail v-model="account.currentUser.email" />
         </div>
       </BaseFieldset>
 
-      <button type="submit">
-        Save Changes
-      </button>
+      <BaseButton type="submit">
+        Update Profile
+      </BaseButton>
     </form>
 
-    <div>
-      <RouterLink :to="{name: 'password reset'}">
-        Reset Password
-      </RouterLink>
-    </div>
+    <form @submit.prevent="handleUpdatePassword" class="measure mb4 pa3 br2 ba b--black-10">
+      <BaseFieldset>
+        <legend class="b f4">Change Password</legend>
+        <div class="mv3">
+          <BaseLabel>New Password</BaseLabel>
+          <BaseInputPassword v-model.trim="password" />
+        </div>
+        <div class="mv3">
+          <BaseLabel>Confirm New Password</BaseLabel>
+          <BaseInputPassword v-model.trim="passwordConfirm" />
+        </div>
+      </BaseFieldset>
 
-    <div>
-      <button @click="handleDeleteUser">
+      <p v-if="account.errors && account.errors.length > 0" class="f6 ma0 mt3 pa3 bg-washed-red dark-red">
+        {{ account.errors }}
+      </p>
+
+      <BaseButton type="submit">
+        Update Password
+      </BaseButton>
+    </form>
+
+    <div class="measure mb4 pa3 ba b--black-10">
+      <legend class="b f4">Delete you account</legend>
+
+      <button onClick="handleDeleteUser">
         Delete Account
       </button>
     </div>
@@ -54,6 +82,7 @@
 <script>
 import { mapState } from 'vuex';
 import { storage } from '@/main';
+import { log } from 'util';
 
 export default {
   data() {
@@ -62,17 +91,27 @@ export default {
       name: '',
       file: null,
       progress: 0,
+      password: '',
+      passwordConfirm: '',
     };
   },
 
   computed: {
-    ...mapState(['user']),
+    ...mapState(['account']),
   },
 
   methods: {
     holdFile(event) {
       this.file = event.target.files[0];
       this.progress = 0;
+    },
+
+    handleUpdatePassword() {
+      this.$store.dispatch('updatePassword', {
+        password: this.password,
+        passwordConfirm: this.passwordConfirm,
+      });
+
     },
 
     uploadAvatar(image, userId) {
