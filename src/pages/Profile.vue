@@ -82,7 +82,6 @@
 <script>
 import { mapState } from 'vuex';
 import { storage } from '@/main';
-import { log } from 'util';
 
 export default {
   data() {
