@@ -41,6 +41,22 @@ const actions = {
         router.push({ name: 'login' })
       })
   },
+
+  async updatePassword({ commit }, { password, passwordConfirm }) {
+    if ( password && passwordConfirm && password === passwordConfirm ) {
+      auth.currentUser.updatePassword(password)
+        .then(() => {
+          commit(types.UNSET_ERRORS)
+        })
+        .catch((error) => {
+          commit(types.SET_ERRORS, [error])
+        })
+    } else {
+      commit(types.SET_ERRORS, [{
+        message: 'Passwords must match'
+      }])
+    }
+  }
 }
 
 const mutations = {
