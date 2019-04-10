@@ -1,6 +1,7 @@
 import { camelCase, upperFirst } from 'lodash'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/functions'
 import 'firebase/auth'
 import 'firebase/storage'
 import Raven from 'raven-js'
