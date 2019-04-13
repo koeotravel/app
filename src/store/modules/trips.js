@@ -33,7 +33,7 @@ const actions = {
             commit('setMembers',result)
         })
     },
-    createTrip: async (__, { userId, name, description, start, end }) => {
+    createTrip: async ({ commit }, { userId, name, description, start, end }) => {
         const create = firebase.functions().httpsCallable('tripCreate')
         await create({
             userId,
@@ -42,10 +42,10 @@ const actions = {
             start,
             end
         }).then(function (result) {
-            console.log(result)
+            commit('setTrip', result)
         })
     },
-    getTrip: async (__, { userId, name, description, start, end }) => {
+    getTrip: async ({commit}, { userId, name, description, start, end }) => {
         const create = firebase.functions().httpsCallable('tripCreate')
         await create({
             userId,
@@ -54,7 +54,7 @@ const actions = {
             start,
             end
         }).then(function (result) {
-            console.log(result)
+            commit('setTrip', result)
         })
     },
 };
