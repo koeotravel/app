@@ -1,4 +1,4 @@
-import { fun as functions } from '@/main'
+import { functions } from '@/main'
 
 const initialState = {
     trip: {
@@ -33,8 +33,7 @@ const actions = {
     },
     createTrip: async ({ userId, name, description, start, end }) => {
         const create = functions.httpsCallable('tripCreate')
-        // { userId: 'testUserFOO', name: 'MyTrip', description: 'goingPlaces', start: { date: 'today', time: 'now' }, end: { date: 'today', time: 'now' } }
-
+    
         await create({
             userId,
             name,
