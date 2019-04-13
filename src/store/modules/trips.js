@@ -1,6 +1,4 @@
-import { firebase } from '@/main'
-
-// TODO: initial state, mutations, getters
+import { fun as functions } from '@/main'
 
 const initialState = {
     trip: {
@@ -14,7 +12,7 @@ const initialState = {
 
 const actions = {
     addEvents: async ({ commit }, { tripId, eventsId, events }) => {
-        const addEvents = firebase.functions().httpsCallable('tripAddEvents')
+        const addEvents = functions.httpsCallable('tripAddEvents')
         await addEvents({
             tripId,
             eventsId,
@@ -24,7 +22,7 @@ const actions = {
         })
     },
     addMembers: async ({ commit }, { tripId, membersId, events }) => {
-        const addMembers = firebase.functions().httpsCallable('tripAddMembers')
+        const addMembers = functions.httpsCallable('tripAddMembers')
         await addMembers({
             tripId,
             membersId,
@@ -33,8 +31,10 @@ const actions = {
             commit('setMembers',result)
         })
     },
-    createTrip: async ({ commit }, { userId, name, description, start, end }) => {
-        const create = firebase.functions().httpsCallable('tripCreate')
+    createTrip: async ({ userId, name, description, start, end }) => {
+        const create = functions.httpsCallable('tripCreate')
+        // { userId: 'testUserFOO', name: 'MyTrip', description: 'goingPlaces', start: { date: 'today', time: 'now' }, end: { date: 'today', time: 'now' } }
+
         await create({
             userId,
             name,
@@ -42,11 +42,11 @@ const actions = {
             start,
             end
         }).then(function (result) {
-            commit('setTrip', result)
+            //get trip
         })
     },
     getTrip: async ({commit}, { userId, name, description, start, end }) => {
-        const create = firebase.functions().httpsCallable('tripCreate')
+        const create = functions.httpsCallable('tripCreate')
         await create({
             userId,
             name,

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
 import accountModule from './modules/account';
+import tripsModule from './modules/trips';
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
 
   modules: {
     account: accountModule,
+    trip: tripsModule,
   },
 
   plugins: [
