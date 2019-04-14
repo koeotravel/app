@@ -1,6 +1,7 @@
 import { camelCase, upperFirst } from 'lodash'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/functions'
 import 'firebase/auth'
 import 'firebase/storage'
 import Raven from 'raven-js'
@@ -20,7 +21,7 @@ const config = {
 }
 
 firebase.initializeApp(config)
-
+export const functions = firebase.functions()
 export const db = firebase.firestore()
 export const auth = firebase.auth()
 export const storage = firebase.storage()
