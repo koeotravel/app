@@ -43,6 +43,7 @@ const actions = {
             end
         }).then(function (result) {
             //get trip
+            return result;
         })
     },
     getTrip: async ({ commit }, tripId) => {
