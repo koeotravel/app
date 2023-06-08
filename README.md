@@ -1,26 +1,42 @@
-# app
+# App
 
-## Project setup
-```
+Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
+## Setup
+
+Make sure to install the dependencies:
+
+```bash
+# yarn
+yarn install
+
+# npm
 npm install
+
+# pnpm
+pnpm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+## Development Server
+
+Start the development server on `http://localhost:3000`
+
+```bash
+npm run dev
 ```
 
-### Compiles and minifies for production
-```
+## Production
+
+Build the application for production:
+
+```bash
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
+Locally preview production build:
+
+```bash
+npm run preview
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

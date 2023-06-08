@@ -1,63 +1,16 @@
 {
   "name": "app",
-  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve --mode development",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test": "npm run lint",
-    "now-build": "vue-cli-service build"
-  },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "firebase": "^5.5.4",
-    "lodash": "^4.17.11",
-    "moment": "^2.22.2",
-    "raven-js": "^3.27.0",
-    "unsplash-js": "^5.0.0",
-    "validator": "^10.8.0",
-    "vue": "^2.5.17",
-    "vue-feather-icons": "^4.7.1",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "vuex-persist": "^1.7.2"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.5",
-    "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-service": "^3.0.5",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
-    "modularscale-sass": "^3.0.8",
-    "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0",
-    "tachyons-sass": "^4.9.5",
-    "vue-template-compiler": "^2.5.17"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+    "@nuxt/devtools": "latest",
+    "@types/node": "^18",
+    "nuxt": "^3.5.2"
+  }
 }

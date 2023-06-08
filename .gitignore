@@ -1,31 +1,17 @@
-.DS_Store
+# Nuxt dev/build outputs
+.output
+.nuxt
+
+# Node dependencies
 node_modules
-/dist
 
-# local env files
-.env.local
-.env.*.local
+# Logs
+logs
+*.log
 
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Misc
+.DS_Store
 
-yarn.lock
-
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw*
-
-# Core service files
-/functions
-.firebaserc
-firebase.json
-firestore.indexes.json
-firestore.rules
-storage.rules
+# Local env files
+.env.*
+!.env.example
