@@ -58,27 +58,17 @@ watch(path, () => {
 
 <template>
   <div>
-    <img
-      v-if="src"
-      :src="src"
-      alt="Avatar"
-      class="avatar image"
-      style="width: 10em; height: 10em;"
-    />
-    <div v-else class="avatar no-image" :style="{ height: size, width: size }" />
+    <UAvatar v-if="src" :src="src" size="3xl" alt="avatat image" />
+    <div v-else class="avatar no-image" :style="{ height: size, width: size }">
+    </div>
 
     <div style="width: 10em; position: relative;">
       <label class="button primary block" for="single">
         {{ uploading ? 'Uploading ...' : 'Upload' }}
       </label>
-      <input
-        style="position: absolute; visibility: hidden;"
-        type="file"
-        id="single"
-        accept="image/*"
-        @change="uploadAvatar"
-        :disabled="uploading"
-      />
+      <input style="position: absolute; visibility: hidden;" type="file"
+        id="single" accept="image/*" @change="uploadAvatar"
+        :disabled="uploading" />
     </div>
   </div>
 </template>
