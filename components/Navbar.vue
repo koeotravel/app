@@ -8,6 +8,11 @@ const items = [
     label: 'Profile',
     to: '/profile',
     icon: 'i-heroicons-user',
+  },
+  {
+    label: 'Trips',
+    to: '/trips',
+    icon: 'i-heroicons-rectangle-stack',
   }],
   [{
     label: 'Logout',
