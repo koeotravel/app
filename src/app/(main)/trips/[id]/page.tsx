@@ -43,7 +43,8 @@ export default function TripPage() {
     };
 
     fetchTrip();
-  }, [tripId, supabase]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tripId]);
 
   if (!trip) {
     return <div className={styles.loading}>Loading...</div>;

@@ -31,7 +31,8 @@ export default function ItineraryPage() {
       setItems((data as ItineraryItem[]) || []);
     };
     fetchItems();
-  }, [tripId, supabase]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tripId]);
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();

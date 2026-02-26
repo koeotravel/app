@@ -29,7 +29,8 @@ export default function PollsPage() {
       setPolls((data as Poll[]) || []);
     };
     fetchPolls();
-  }, [tripId, supabase]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tripId]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +39,7 @@ export default function PollsPage() {
     const { data: { user } } = await supabase.auth.getUser();
     const pollOptions = options
       .filter((o) => o.trim())
-      .map((text, i) => ({ id: String(i), text: text.trim(), votes: 0 }));
+      .map((text, i) => ({ id: String(i), text: text.trim() }));
 
     const { data, error } = await supabase
       .from('polls')
