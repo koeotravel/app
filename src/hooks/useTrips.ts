@@ -40,11 +40,12 @@ export function useCreateTrip() {
       if (error) throw error;
 
       // Auto-add creator as captain
-      await supabase.from('trip_members').insert({
+      const { error: memberError } = await supabase.from('trip_members').insert({
         trip_id: data.id,
         user_id: user.id,
         role: 'captain',
       });
+      if (memberError) throw memberError;
 
       return data;
     },
