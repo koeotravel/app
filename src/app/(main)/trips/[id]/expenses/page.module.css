@@ -1,0 +1,78 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.total {
+  font-size: 14px;
+  color: var(--color-zinc-400);
+  margin-top: 2px;
+}
+
+.addCard {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.addActions {
+  display: flex;
+  gap: 8px;
+}
+
+.empty {
+  padding: 32px;
+  text-align: center;
+  color: var(--color-zinc-500);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.expenseCard {
+  padding: 16px;
+}
+
+.expenseHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.expenseDesc {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.expenseAmount {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-green-500);
+}
+
+.expenseCategory {
+  font-size: 13px;
+  color: var(--color-zinc-500);
+}
