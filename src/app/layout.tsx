@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Providers } from '@/components/Providers';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const geistSans = localFont({
+  src: './fonts/GeistVF.woff',
+  variable: '--font-body',
+  weight: '100 900',
+});
 
 export const metadata: Metadata = {
   title: 'Coeo — Group Travel Planning',
@@ -17,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body className={geistSans.className}>
         <Providers>{children}</Providers>
       </body>
     </html>

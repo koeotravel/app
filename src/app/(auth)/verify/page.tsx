@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -10,6 +10,14 @@ import { createClient } from '@/lib/supabase/client';
 import styles from './page.module.css';
 
 export default function VerifyPage() {
+  return (
+    <Suspense fallback={<div style={{ color: 'var(--color-zinc-500)', textAlign: 'center', padding: '48px' }}>Loading...</div>}>
+      <VerifyForm />
+    </Suspense>
+  );
+}
+
+function VerifyForm() {
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);

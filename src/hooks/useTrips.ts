@@ -18,7 +18,8 @@ export function useTrips() {
         .select('trip_id, trips(*)')
         .eq('user_id', user.id);
       if (error) throw error;
-      return (data?.map((tm: { trips: Trip }) => tm.trips) ?? []) as Trip[];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (data?.map((tm: any) => tm.trips).filter(Boolean) ?? []) as Trip[];
     },
     enabled: !!user,
   });
