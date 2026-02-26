@@ -7,6 +7,18 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Missing url parameter' }, { status: 400 });
   }
 
+  // Validate URL format to prevent SSRF
+  let parsedUrl: URL;
+  try {
+    parsedUrl = new URL(url);
+  } catch {
+    return NextResponse.json({ error: 'Invalid URL' }, { status: 400 });
+  }
+
+  if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+    return NextResponse.json({ error: 'Only HTTP(S) URLs are allowed' }, { status: 400 });
+  }
+
   try {
     const response = await fetch(url);
     const html = await response.text();
