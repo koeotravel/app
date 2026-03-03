@@ -32,7 +32,15 @@ export default function PhonePage() {
       });
 
       if (authError) {
-        setError(authError.message);
+        const isEmailProviderDisabled =
+          authError.message.toLowerCase().includes('email provider is disabled') ||
+          authError.message.toLowerCase().includes('email logins are disabled') ||
+          authError.message.toLowerCase().includes('signups not allowed');
+        setError(
+          isEmailProviderDisabled
+            ? 'Email login is disabled in Supabase. Enable Email provider and signups in Auth > Providers > Email.'
+            : authError.message
+        );
         return;
       }
 
@@ -49,7 +57,7 @@ export default function PhonePage() {
       <GlassCard className={styles.card}>
         <div className={styles.header}>
           <h1 className={styles.title}>Welcome to Coeo</h1>
-          <p className={styles.subtitle}>Enter your email to get started</p>
+          <p className={styles.subtitle}>Enter your email to sign in or create an account</p>
         </div>
         <form onSubmit={handleSubmit} className={styles.form}>
           <Input

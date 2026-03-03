@@ -20,6 +20,18 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Supabase Email Login Setup
+
+If you cannot log in with email OTP, make sure your Supabase project is configured:
+
+1. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to `.env.local`.
+2. In Supabase Dashboard, go to **Auth → Providers → Email** and enable:
+   - **Email provider**
+   - **Email signups**
+3. In **Auth → Email Templates**, keep the OTP token (`{{ .Token }}`) in your sign-in email template, since this app verifies a 6-digit code on `/verify`.
+
+You do **not** need to manually create users in Supabase Auth. Entering an email in the app creates the user on first sign in.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
