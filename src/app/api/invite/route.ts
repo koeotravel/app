@@ -40,9 +40,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing tripId or email' }, { status: 400 });
     }
 
+    if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+
     const supabaseAdmin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
-      process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder',
+      process.env.SUPABASE_SERVICE_ROLE_KEY,
     );
 
     // Create invite token
