@@ -1,0 +1,65 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: var(--color-zinc-500);
+}
+
+.section {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.memberList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.memberName {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.memberRole {
+  font-size: 13px;
+  color: var(--color-zinc-500);
+  text-transform: capitalize;
+}
+
+.inviteForm {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.inviteStatus {
+  font-size: 13px;
+  color: var(--color-zinc-400);
+  margin-top: 8px;
+}

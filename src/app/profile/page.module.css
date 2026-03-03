@@ -1,0 +1,34 @@
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.card {
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.avatarSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.message {
+  font-size: 14px;
+  color: var(--color-green-500);
+  text-align: center;
+}
