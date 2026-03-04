@@ -25,6 +25,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 If you cannot log in with email OTP, make sure your Supabase project is configured:
 
 1. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to `.env.local`.
+   - The app connects to the Supabase database behind the URL in `NEXT_PUBLIC_SUPABASE_URL` (for example, `https://<your-project-ref>.supabase.co`).
+   - If `NEXT_PUBLIC_SUPABASE_URL` is missing, the code falls back to `https://placeholder.supabase.co` (placeholder only).
 2. In Supabase Dashboard, go to **Auth → Providers → Email** and enable:
    - **Email provider**
    - **Email signups**
